@@ -22,6 +22,10 @@ class AppWrapper extends StatefulWidget {
 class _AppWrapperState extends State<AppWrapper> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(onGenerateRoute: GeneratedRoute.generatedRoute);
+    return MaterialApp(
+        themeMode: ThemeMode.light,
+        theme: ThemeData.light(),
+        darkTheme: ThemeData.dark(),
+        onGenerateRoute: GeneratedRoute.generatedRoute);
   }
 }
