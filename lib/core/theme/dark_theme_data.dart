@@ -4,51 +4,29 @@ import 'package:rmo_food/core/theme/common_theme.dart';
 class DarkThemeData {
   static Color labelColor = Colors.white;
 
+  static TextStyle labelLarge = TextStyle(
+      fontFamily: fontFamily, color: labelColor, fontSize: fontSizeLarge);
+  static TextStyle labelMedium = TextStyle(
+      fontFamily: fontFamily, color: labelColor, fontSize: fontSizeMedium);
+  static TextStyle labelSmall = TextStyle(
+      fontFamily: fontFamily, color: labelColor, fontSize: fontSizeSmall);
+
   static ThemeData themeData() {
     return ThemeData.dark().copyWith(
-        appBarTheme: AppBarTheme(
-            centerTitle: true,
-            titleTextStyle: TextStyle(
-                fontFamily: fontFamily,
-                color: labelColor,
-                fontSize: fontSizeLarge)),
+        appBarTheme: AppBarTheme(centerTitle: true, titleTextStyle: labelLarge),
         textTheme: TextTheme(
-            headlineLarge: TextStyle(
-                fontFamily: fontFamily,
-                color: labelColor,
-                fontSize: fontSizeLarge),
-            headlineMedium: TextStyle(
-                fontFamily: fontFamily,
-                color: labelColor,
-                fontSize: fontSizeMedium),
-            headlineSmall: TextStyle(
-                fontFamily: fontFamily,
-                color: labelColor,
-                fontSize: fontSizeSmall),
-            displayLarge: TextStyle(
-                fontFamily: fontFamily,
-                color: labelColor,
-                fontSize: fontSizeLarge),
-            displayMedium: TextStyle(
-                fontFamily: fontFamily,
-                color: labelColor,
-                fontSize: fontSizeMedium),
-            displaySmall: TextStyle(
-                fontFamily: fontFamily,
-                color: labelColor,
-                fontSize: fontSizeSmall),
-            bodyLarge: TextStyle(
-                fontFamily: fontFamily,
-                color: labelColor,
-                fontSize: fontSizeLarge),
-            bodyMedium: TextStyle(
-                fontFamily: fontFamily,
-                color: labelColor,
-                fontSize: fontSizeMedium),
-            bodySmall: TextStyle(
-                fontFamily: fontFamily,
-                color: labelColor,
-                fontSize: fontSizeSmall)),
+            titleLarge: labelLarge,
+            titleMedium: labelMedium,
+            titleSmall: labelSmall,
+            headlineLarge: labelLarge,
+            headlineMedium: labelMedium,
+            headlineSmall: labelSmall,
+            displayLarge: labelLarge,
+            displayMedium: labelMedium,
+            displaySmall: labelSmall,
+            bodyLarge: labelLarge,
+            bodyMedium: labelMedium,
+            bodySmall: labelSmall),
         primaryColor: primaryColor);
   }
 }
