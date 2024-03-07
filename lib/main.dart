@@ -2,12 +2,15 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:rmo_food/config/routes_generate.dart';
 import 'package:rmo_food/core/theme/dark_theme_data.dart';
 import 'package:rmo_food/core/theme/light_theme_data.dart';
 
 void main() {
   runZonedGuarded(() {
+    WidgetsFlutterBinding.ensureInitialized();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     runApp(const AppWrapper());
   }, (error, stack) {
     log(error.toString());

@@ -11,8 +11,27 @@ class DarkThemeData {
   static TextStyle labelSmall = TextStyle(
       fontFamily: fontFamily, color: labelColor, fontSize: fontSizeSmall);
 
+  static OutlineInputBorder get inputBorder => OutlineInputBorder(
+      borderSide: const BorderSide(color: Colors.transparent, width: 0),
+      borderRadius: BorderRadius.circular(2));
+  static InputDecorationTheme inputDecrationTheme = InputDecorationTheme(
+      floatingLabelStyle: labelMedium,
+      counterStyle: labelMedium,
+      labelStyle: labelMedium.copyWith(color: Colors.grey),
+      hintStyle:
+          labelMedium.copyWith(color: Colors.grey, fontWeight: FontWeight.w100),
+      focusedErrorBorder: inputBorder,
+      contentPadding: const EdgeInsets.all(14),
+      enabledBorder: inputBorder,
+      errorBorder: inputBorder,
+      disabledBorder: inputBorder,
+      focusedBorder: inputBorder,
+      filled: true,
+      border: inputBorder);
+
   static ThemeData themeData() {
     return ThemeData.dark().copyWith(
+        inputDecorationTheme: inputDecrationTheme,
         appBarTheme: AppBarTheme(centerTitle: true, titleTextStyle: labelLarge),
         textTheme: TextTheme(
             titleLarge: labelLarge,

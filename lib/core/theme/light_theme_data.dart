@@ -31,18 +31,6 @@ class LightThemeData {
 
   static ThemeData themeData() {
     return ThemeData.light().copyWith(
-        buttonTheme: const ButtonThemeData(
-            buttonColor: Colors.black,
-            highlightColor: Colors.red,
-            splashColor: Colors.red,
-            height: 200),
-        // elevatedButtonTheme: ElevatedButtonThemeData(
-        //     style: ButtonStyle(
-        //       shape: ,
-        //         textStyle: MaterialStateTextStyle.resolveWith(
-        //             (states) => labelMedium.copyWith(color: Colors.white)),
-        //         backgroundColor:
-        //             MaterialStateColor.resolveWith((states) => primaryColor))),
         inputDecorationTheme: inputDecrationTheme,
         appBarTheme: AppBarTheme(centerTitle: true, titleTextStyle: labelLarge),
         textTheme: TextTheme(

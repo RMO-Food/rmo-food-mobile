@@ -16,16 +16,17 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(
-        vsync: this, duration: const Duration(seconds: 2))
-      ..addListener(() => setState(() {}))
-      ..forward().whenComplete(
-          () => Navigator.pushReplacementNamed(context, Routes.loginScreen));
+    controller =
+        AnimationController(vsync: this, duration: const Duration(seconds: 2))
+          ..addListener(() => setState(() {}))
+          ..forward().whenComplete(
+              () => Navigator.pushReplacementNamed(context, Routes.home));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Center(
             child: SvgPicture.asset("assets/icons/splash.svg",
                 color: Colors.red,
