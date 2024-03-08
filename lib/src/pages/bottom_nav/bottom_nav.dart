@@ -23,19 +23,18 @@ class _HomeNavigationScreenState extends State<HomeNavigationScreen>
     ChekoutScreen()
   ];
   final List<Widget> bottomNavs = <Widget>[
-    Column(
+    const Column(
         mainAxisSize: MainAxisSize.min,
-        children: [Icon(Icons.home, color: primaryColor), const Text("Home")]),
-    Column(
+        children: [Icon(Icons.home, color: primaryColor), Text("Home")]),
+    const Column(
         mainAxisSize: MainAxisSize.min,
-        children: [Icon(Icons.home, color: primaryColor), const Text("Cafe")]),
-    Column(
+        children: [Icon(Icons.home, color: primaryColor), Text("Cafe")]),
+    const Column(
         mainAxisSize: MainAxisSize.min,
-        children: [Icon(Icons.home, color: primaryColor), const Text("Menu")]),
-    Column(mainAxisSize: MainAxisSize.min, children: [
-      Icon(Icons.home, color: primaryColor),
-      const Text("Checkout")
-    ])
+        children: [Icon(Icons.home, color: primaryColor), Text("Menu")]),
+    const Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [Icon(Icons.home, color: primaryColor), Text("Checkout")])
   ];
 
   @override
@@ -56,7 +55,11 @@ class _HomeNavigationScreenState extends State<HomeNavigationScreen>
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
             onTap: () {},
-            child: CircleAvatar(radius: 35, backgroundColor: primaryColor)),
+            child: const CircleAvatar(
+                radius: 35,
+                backgroundColor: primaryColor,
+                child: Icon(Icons.qr_code_scanner,
+                    color: Colors.white, size: 50))),
         bottomNavigationBar: BottomAppBar(
             padding: EdgeInsets.zero,
             height: 60,

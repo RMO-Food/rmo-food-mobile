@@ -31,6 +31,13 @@ class DarkThemeData {
 
   static ThemeData themeData() {
     return ThemeData.dark().copyWith(
+        listTileTheme: ListTileThemeData(
+            titleTextStyle: labelMedium.copyWith(
+                color: Colors.grey.shade400,
+                fontWeight: FontWeight.bold,
+                fontSize: 13),
+            subtitleTextStyle:
+                labelMedium.copyWith(fontSize: 11, color: Colors.grey)),
         inputDecorationTheme: inputDecrationTheme,
         appBarTheme: AppBarTheme(centerTitle: true, titleTextStyle: labelLarge),
         textTheme: TextTheme(

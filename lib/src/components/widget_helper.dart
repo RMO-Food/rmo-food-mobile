@@ -16,7 +16,14 @@ class AppWidgetHelper {
         decoration: BoxDecoration(
             color: color ?? Theme.of(context).scaffoldBackgroundColor,
             borderRadius: BorderRadius.circular(2),
-            boxShadow: [BoxShadow(color: Colors.grey.shade300, blurRadius: 5)]),
+            boxShadow: [
+              BoxShadow(
+                  color:
+                      MediaQuery.platformBrightnessOf(context).name == "light"
+                          ? Colors.grey.shade300
+                          : Colors.black54,
+                  blurRadius: 5)
+            ]),
         width: width,
         height: height,
         child: child);
