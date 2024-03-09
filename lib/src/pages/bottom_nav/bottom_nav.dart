@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rmo_food/config/routes_imports.dart';
 import 'package:rmo_food/core/theme/common_theme.dart';
 import 'package:rmo_food/src/pages/cafe/cafe.dart';
 import 'package:rmo_food/src/pages/checkout/checkout.dart';
@@ -22,25 +23,13 @@ class _HomeNavigationScreenState extends State<HomeNavigationScreen>
     MenuScreen(),
     ChekoutScreen()
   ];
-  final List<Widget> bottomNavs = <Widget>[
-    const Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [Icon(Icons.home, color: primaryColor), Text("Home")]),
-    const Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [Icon(Icons.home, color: primaryColor), Text("Cafe")]),
-    const Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [Icon(Icons.home, color: primaryColor), Text("Menu")]),
-    const Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [Icon(Icons.home, color: primaryColor), Text("Checkout")])
-  ];
 
   @override
   void initState() {
     super.initState();
-    pageController = PageController();
+    pageController = PageController()
+      ..addListener(
+          () => setState(() => currentIndex = pageController.page!.toInt()));
   }
 
   @override
@@ -51,15 +40,18 @@ class _HomeNavigationScreenState extends State<HomeNavigationScreen>
             itemCount: screens.length,
             itemBuilder: (context, index) => screens[index]),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: InkWell(
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onTap: () {},
-            child: const CircleAvatar(
-                radius: 35,
-                backgroundColor: primaryColor,
-                child: Icon(Icons.qr_code_scanner,
-                    color: Colors.white, size: 50))),
+        floatingActionButton: Material(
+            shape: const CircleBorder(),
+            color: primaryColor,
+            child: InkWell(
+                highlightColor: Colors.black12,
+                customBorder: const CircleBorder(),
+                onTap: () => Navigator.pushNamed(context, Routes.qrScanner),
+                child: const CircleAvatar(
+                    radius: 35,
+                    backgroundColor: Colors.transparent,
+                    child: Icon(Icons.qr_code_scanner,
+                        color: Colors.white, size: 50)))),
         bottomNavigationBar: BottomAppBar(
             padding: EdgeInsets.zero,
             height: 60,
@@ -121,7 +113,7 @@ class _HomeNavigationScreenState extends State<HomeNavigationScreen>
         highlightColor: Colors.transparent,
         onTap: onTap,
         child: Column(mainAxisSize: MainAxisSize.min, children: [
-          Icon(size: 30, icon, color: color ?? Colors.grey.shade500),
+          Icon(size: 23, icon, color: color ?? Colors.grey.shade500),
           Text(label, style: TextStyle(color: color ?? Colors.grey.shade500))
         ]));
   }
