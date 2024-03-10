@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             .textTheme
                                             .titleMedium!
                                             .copyWith(color: Colors.red)),
-                                    FixedGaps.vertialGap20,
+                                    FixedGaps.verticalGap20,
                                     TextFormField(
                                         cursorColor: primaryColor,
                                         autovalidateMode:
@@ -59,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         decoration: const InputDecoration(
                                             hintText: "Username"),
                                         style: const TextStyle(fontSize: 12)),
-                                    FixedGaps.vertialGap20,
+                                    FixedGaps.verticalGap20,
                                     TextFormField(
                                         autovalidateMode:
                                             AutovalidateMode.onUserInteraction,
@@ -80,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                     color: Colors.grey)),
                                             hintText: "Password"),
                                         style: const TextStyle(fontSize: 12)),
-                                    FixedGaps.vertialGap20,
+                                    FixedGaps.verticalGap20,
                                     FullButton(
                                         onPressed: () {
                                           formKey.currentState!.validate();

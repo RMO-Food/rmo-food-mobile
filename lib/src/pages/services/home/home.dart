@@ -19,12 +19,12 @@ class HomeScreen extends StatelessWidget {
             child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(children: [
-                  FixedGaps.vertialGap20,
+                  FixedGaps.verticalGap20,
                   // Address
                   AppWidgetHelper.decoratedContainer(context,
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Column(children: [
-                        FixedGaps.vertialGap5,
+                        FixedGaps.verticalGap5,
                         Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -55,12 +55,12 @@ class HomeScreen extends StatelessWidget {
                             title: Text("Jorpati, Kathmandu | Nepal"),
                             subtitle: Text("Opposite to S.P.S school"))
                       ])),
-                  FixedGaps.vertialGap20,
+                  FixedGaps.verticalGap20,
                   AppWidgetHelper.decoratedContainer(context,
                       height: 300,
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Column(children: [
-                        FixedGaps.vertialGap5,
+                        FixedGaps.verticalGap5,
                         Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -84,7 +84,7 @@ class HomeScreen extends StatelessWidget {
                                                 color: primaryColor)
                                           ])))
                             ]),
-                        FixedGaps.vertialGap10,
+                        FixedGaps.verticalGap10,
                         Expanded(
                             child: ListView.builder(
                                 physics: const BouncingScrollPhysics(),
@@ -106,12 +106,12 @@ class HomeScreen extends StatelessWidget {
                                   );
                                 }))
                       ])),
-                  FixedGaps.vertialGap20,
+                  FixedGaps.verticalGap20,
                   AppWidgetHelper.decoratedContainer(context,
                       height: 300,
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Column(children: [
-                        FixedGaps.vertialGap5,
+                        FixedGaps.verticalGap5,
                         Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -135,7 +135,7 @@ class HomeScreen extends StatelessWidget {
                                                 color: primaryColor)
                                           ])))
                             ]),
-                        FixedGaps.vertialGap10,
+                        FixedGaps.verticalGap10,
                         Expanded(
                             child: ListView.builder(
                                 physics: const BouncingScrollPhysics(),
@@ -162,7 +162,7 @@ class HomeScreen extends StatelessWidget {
                                   );
                                 }))
                       ])),
-                  FixedGaps.vertialGap20
+                  FixedGaps.verticalGap20
                 ]))));
   }
 }

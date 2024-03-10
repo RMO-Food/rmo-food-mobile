@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:rmo_food/config/routes_imports.dart';
 import 'package:rmo_food/core/theme/common_theme.dart';
-import 'package:rmo_food/src/pages/cafe/cafe.dart';
-import 'package:rmo_food/src/pages/checkout/checkout.dart';
-import 'package:rmo_food/src/pages/home/home.dart';
-import 'package:rmo_food/src/pages/menu/menu.dart';
+import 'package:rmo_food/src/pages/services/cafe/presentation/cafe.dart';
+import 'package:rmo_food/src/pages/services/checkout/checkout.dart';
+import 'package:rmo_food/src/pages/services/home/home.dart';
+import 'package:rmo_food/src/pages/services/menu/menu.dart';
 
 class HomeNavigationScreen extends StatefulWidget {
   const HomeNavigationScreen({super.key});

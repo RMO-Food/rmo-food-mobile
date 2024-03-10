@@ -5,7 +5,10 @@ class LightThemeData {
   static Color labelColor = Colors.black87;
 
   static TextStyle labelLarge = TextStyle(
-      fontFamily: fontFamily, color: labelColor, fontSize: fontSizeLarge);
+      fontWeight: FontWeight.bold,
+      fontFamily: fontFamily,
+      color: labelColor,
+      fontSize: fontSizeLarge);
   static TextStyle labelMedium = TextStyle(
       fontFamily: fontFamily, color: labelColor, fontSize: fontSizeMedium);
   static TextStyle labelSmall = TextStyle(
