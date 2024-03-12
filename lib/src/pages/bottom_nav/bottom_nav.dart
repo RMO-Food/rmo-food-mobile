@@ -40,18 +40,13 @@ class _HomeNavigationScreenState extends State<HomeNavigationScreen>
             itemCount: screens.length,
             itemBuilder: (context, index) => screens[index]),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: Material(
-            shape: const CircleBorder(),
-            color: primaryColor,
-            child: InkWell(
-                highlightColor: Colors.black12,
-                customBorder: const CircleBorder(),
-                onTap: () => Navigator.pushNamed(context, Routes.qrScanner),
-                child: const CircleAvatar(
-                    radius: 35,
-                    backgroundColor: Colors.transparent,
-                    child: Icon(Icons.qr_code_scanner,
-                        color: Colors.white, size: 50)))),
+        floatingActionButton: InkWell(
+            onTap: () => Navigator.pushNamed(context, Routes.qrScanner),
+            child: const CircleAvatar(
+                radius: 35,
+                backgroundColor: primaryColor,
+                child: Icon(Icons.qr_code_scanner,
+                    color: Colors.white, size: 45))),
         bottomNavigationBar: BottomAppBar(
             padding: EdgeInsets.zero,
             height: 60,
@@ -61,20 +56,16 @@ class _HomeNavigationScreenState extends State<HomeNavigationScreen>
                 children: [
                   handleBottomActiveIcon(
                       onTap: () {
-                        setState(() {
-                          currentIndex = 0;
-                          pageController.jumpToPage(currentIndex);
-                        });
+                        currentIndex = 0;
+                        pageController.jumpToPage(currentIndex);
                       },
                       icon: Icons.home,
                       label: "Home",
                       color: currentIndex == 0 ? primaryColor : null),
                   handleBottomActiveIcon(
                       onTap: () {
-                        setState(() {
-                          currentIndex = 1;
-                          pageController.jumpToPage(currentIndex);
-                        });
+                        currentIndex = 1;
+                        pageController.jumpToPage(currentIndex);
                       },
                       icon: Icons.restaurant_rounded,
                       label: "Cafe",
@@ -82,20 +73,16 @@ class _HomeNavigationScreenState extends State<HomeNavigationScreen>
                   const SizedBox(),
                   handleBottomActiveIcon(
                       onTap: () {
-                        setState(() {
-                          currentIndex = 2;
-                          pageController.jumpToPage(currentIndex);
-                        });
+                        currentIndex = 2;
+                        pageController.jumpToPage(currentIndex);
                       },
                       icon: Icons.menu_book,
                       label: "Menu",
                       color: currentIndex == 2 ? primaryColor : null),
                   handleBottomActiveIcon(
                       onTap: () {
-                        setState(() {
-                          currentIndex = 3;
-                          pageController.jumpToPage(currentIndex);
-                        });
+                        currentIndex = 3;
+                        pageController.jumpToPage(currentIndex);
                       },
                       icon: Icons.shopping_cart_checkout,
                       label: "Cart",

@@ -18,37 +18,40 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
         title: ListTile(
             contentPadding: const EdgeInsets.only(top: 20, bottom: 10),
-            leading: leading ??
-                Container(
-                    decoration: const BoxDecoration(
-                        color: primaryColor,
-                        borderRadius: BorderRadius.all(Radius.circular(5))),
-                    height: 40,
-                    width: 40,
-                    child: const Icon(Icons.person, color: Colors.white)),
+            leading: SizedBox(
+                width: 40,
+                height: 40,
+                child: leading ??
+                    const DecoratedBox(
+                        decoration: BoxDecoration(
+                            color: primaryColor,
+                            borderRadius: BorderRadius.all(Radius.circular(5))),
+                        child: Icon(Icons.person, color: Colors.white))),
             title: title ??
-                Text("Hi, John",
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 17,
-                        letterSpacing: -.5)),
+                const Text("Hi, John",
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
             subtitle: subtitle,
             trailing: showSetting!
-                ? Container(
-                    decoration: BoxDecoration(
-                        color: MediaQuery.platformBrightnessOf(context).name ==
-                                "light"
-                            ? Colors.black12
-                            : Colors.grey.shade800,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(5))),
+                ? SizedBox(
                     height: 40,
                     width: 40,
-                    child: Icon(Icons.settings,
-                        color: MediaQuery.platformBrightnessOf(context).name ==
-                                "light"
-                            ? Colors.black54
-                            : Colors.grey))
+                    child: DecoratedBox(
+                        decoration: BoxDecoration(
+                            color:
+                                MediaQuery.platformBrightnessOf(context).name ==
+                                        "light"
+                                    ? Colors.black12
+                                    : Colors.grey.shade800,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(5))),
+                        child: Icon(Icons.settings,
+                            color:
+                                MediaQuery.platformBrightnessOf(context).name ==
+                                        "light"
+                                    ? Colors.black54
+                                    : Colors.grey)),
+                  )
                 : null));
   }
 

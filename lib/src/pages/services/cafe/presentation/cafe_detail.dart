@@ -23,19 +23,19 @@ class CafeDetailScreen extends StatelessWidget {
             flex: 2,
             child: Column(children: [
               FixedGaps.verticalGap50,
-              FixedGaps.verticalGap30,
+              // FixedGaps.verticalGap30,
               SingleChildScrollView(
+                  clipBehavior: Clip.none,
                   physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   child: Row(children: [
                     _fitlerButtons(icon: Icons.coffee, name: "Beverage"),
-                    _fitlerButtons(icon: Icons.local_pizza, name: "Fast Fooda"),
+                    _fitlerButtons(icon: Icons.local_pizza, name: "Fast Food"),
                     _fitlerButtons(icon: Icons.cake, name: "Dessert"),
                     _fitlerButtons(
                         icon: Icons.room_service_sharp, name: "Dinner"),
                     _fitlerButtons(icon: Icons.star_rounded, name: "Special")
                   ])),
-              FixedGaps.verticalGap10,
               Expanded(
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,7 +53,67 @@ class CafeDetailScreen extends StatelessWidget {
                             itemCount: 10,
                             itemBuilder: (context, index) {
                               return AppWidgetHelper.decoratedContainer(context,
-                                  height: 100, child: const Text("data"));
+                                  padding: const EdgeInsets.only(
+                                      left: 5, bottom: 5, top: 5),
+                                  height: 100,
+                                  child: Row(children: [
+                                    const Flexible(
+                                        fit: FlexFit.tight,
+                                        flex: 1,
+                                        child: SizedBox(
+                                            height: double.infinity,
+                                            child: DecoratedBox(
+                                                decoration: BoxDecoration(
+                                                    image: DecorationImage(
+                                                        image: AssetImage(
+                                                            "assets/images/splash.png")))))),
+                                    FixedGaps.horizontalGap5,
+                                    Flexible(
+                                        flex: 3,
+                                        child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              ListTile(
+                                                  contentPadding:
+                                                      EdgeInsets.zero,
+                                                  title: const Text(
+                                                      "Cheese Burger"),
+                                                  subtitle: RichText(
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      maxLines: 2,
+                                                      text: TextSpan(children: [
+                                                        TextSpan(
+                                                            text:
+                                                                "Ingredients: ",
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .bodyMedium!
+                                                                .copyWith(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold)),
+                                                        TextSpan(
+                                                            text:
+                                                                "Cheese, tomato, onion rings, mayonnaise.",
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .bodyMedium!
+                                                                .copyWith(
+                                                                    color: Colors
+                                                                        .black54))
+                                                      ]))),
+                                              const Spacer(),
+                                              const Text("Rs. 250 -/",
+                                                  style: TextStyle(
+                                                      color: primaryColor,
+                                                      fontWeight:
+                                                          FontWeight.bold))
+                                            ]))
+                                  ]));
                             }))
                   ]))
             ]))
@@ -77,20 +137,22 @@ class CafeDetailScreen extends StatelessWidget {
                 height: 170,
                 width: 350,
                 child: Column(children: [
-                  const ListTile(
-                      title: Text("Trisara"),
-                      subtitle: Text("Kathmandu, Durbar marg"),
-                      trailing: Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text("Full Menu",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: primaryColor)),
-                            Icon(Icons.arrow_forward_ios,
-                                size: 14, color: primaryColor)
-                          ])),
+                  ListTile(
+                      title: const Text("Trisara"),
+                      subtitle: const Text("Kathmandu, Durbar marg"),
+                      trailing: InkWell(
+                          onTap: () {},
+                          child: const Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text("Full Menu",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: primaryColor)),
+                                Icon(Icons.arrow_forward_ios,
+                                    size: 14, color: primaryColor)
+                              ]))),
                   Expanded(
                       child: Padding(
                           padding: const EdgeInsets.only(
