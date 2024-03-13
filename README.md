@@ -1,6 +1,7 @@
 # RMO FOOD 
 
-Restaurant Menu Orders (RMO). ![ic_launcher](https://github.com/RMO-Food/rmo-food-mobile/assets/78782368/d1257e5e-c942-4344-bb68-e10cd82359d8)
+![ic_launcher](https://github.com/RMO-Food/rmo-food-mobile/assets/78782368/d1257e5e-c942-4344-bb68-e10cd82359d8)
+Restaurant Menu Orders (RMO). 
 
 This project is a starting point for a Flutter application.
 
