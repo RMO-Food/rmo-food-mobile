@@ -33,7 +33,7 @@ class CafeScreen extends StatelessWidget {
                         margin: const EdgeInsets.only(bottom: 10.0),
                         child: Column(children: [
                           Flexible(
-                              flex: 2,
+                              flex: 7,
                               child: Stack(clipBehavior: Clip.none, children: [
                                 Container(
                                     decoration: const BoxDecoration(
@@ -63,11 +63,12 @@ class CafeScreen extends StatelessWidget {
                                                     color: Colors.white)))))
                               ])),
                           const Flexible(
-                              flex: 1,
+                              flex: 4,
                               child: Column(children: [
                                 ListTile(
                                     title: Text("Trisara"),
                                     subtitle: Text("Kathmandu, Durbar marg")),
+                                Spacer(),
                                 Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [

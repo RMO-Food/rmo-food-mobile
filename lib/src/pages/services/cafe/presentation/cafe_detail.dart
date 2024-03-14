@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rmo_food/core/theme/common_theme.dart';
 import 'package:rmo_food/helper/back_button.dart';
 import 'package:rmo_food/helper/gap.dart';
 import 'package:rmo_food/src/components/widget_helper.dart';
+import 'package:rmo_food/src/pages/services/menu/menu.dart';
 
 class CafeDetailScreen extends StatelessWidget {
   const CafeDetailScreen({super.key});
@@ -70,49 +72,59 @@ class CafeDetailScreen extends StatelessWidget {
                                     FixedGaps.horizontalGap5,
                                     Flexible(
                                         flex: 3,
-                                        child: Column(
+                                        child: Column(children: [
+                                          Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              ListTile(
-                                                  contentPadding:
-                                                      EdgeInsets.zero,
-                                                  title: const Text(
-                                                      "Cheese Burger"),
-                                                  subtitle: RichText(
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      maxLines: 2,
-                                                      text: TextSpan(children: [
-                                                        TextSpan(
-                                                            text:
-                                                                "Ingredients: ",
-                                                            style: Theme.of(
-                                                                    context)
-                                                                .textTheme
-                                                                .bodyMedium!
-                                                                .copyWith(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold)),
-                                                        TextSpan(
-                                                            text:
-                                                                "Cheese, tomato, onion rings, mayonnaise.",
-                                                            style: Theme.of(
-                                                                    context)
-                                                                .textTheme
-                                                                .bodyMedium!
-                                                                .copyWith(
-                                                                    color: Colors
-                                                                        .black54))
-                                                      ]))),
-                                              const Spacer(),
-                                              const Text("Rs. 250 -/",
+                                              const Text("Cheese Burger",
                                                   style: TextStyle(
-                                                      color: primaryColor,
+                                                      fontSize: 13,
                                                       fontWeight:
-                                                          FontWeight.bold))
-                                            ]))
+                                                          FontWeight.w900,
+                                                      fontFamily: "Lexend")),
+                                              RichText(
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 2,
+                                                  text: TextSpan(children: [
+                                                    TextSpan(
+                                                        text: "Ingredients: ",
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .bodyMedium!
+                                                            .copyWith(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold)),
+                                                    TextSpan(
+                                                        text:
+                                                            "Cheese, tomato, onion rings, mayonnaise.",
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .bodyMedium!
+                                                            .copyWith(
+                                                                color: Colors
+                                                                    .black54))
+                                                  ]))
+                                            ],
+                                          ),
+                                          const Spacer(),
+                                          const Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text("Rs. 250 -/",
+                                                    style: TextStyle(
+                                                        color: primaryColor,
+                                                        fontWeight:
+                                                            FontWeight.bold)),
+                                                Icon(Icons.add_box_sharp,
+                                                    color: primaryColor,
+                                                    size: 30)
+                                              ])
+                                        ]))
                                   ]));
                             }))
                   ]))
@@ -141,7 +153,12 @@ class CafeDetailScreen extends StatelessWidget {
                       title: const Text("Trisara"),
                       subtitle: const Text("Kathmandu, Durbar marg"),
                       trailing: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                    builder: (context) => const MenuScreen()));
+                          },
                           child: const Row(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               mainAxisSize: MainAxisSize.min,
