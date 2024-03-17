@@ -53,80 +53,7 @@ class CafeDetailScreen extends StatelessWidget {
                             separatorBuilder: (context, index) =>
                                 FixedGaps.verticalGap20,
                             itemCount: 10,
-                            itemBuilder: (context, index) {
-                              return AppWidgetHelper.decoratedContainer(context,
-                                  padding: const EdgeInsets.only(
-                                      left: 5, bottom: 5, top: 5),
-                                  height: 100,
-                                  child: Row(children: [
-                                    const Flexible(
-                                        fit: FlexFit.tight,
-                                        flex: 1,
-                                        child: SizedBox(
-                                            height: double.infinity,
-                                            child: DecoratedBox(
-                                                decoration: BoxDecoration(
-                                                    image: DecorationImage(
-                                                        image: AssetImage(
-                                                            "assets/images/splash.png")))))),
-                                    FixedGaps.horizontalGap5,
-                                    Flexible(
-                                        flex: 3,
-                                        child: Column(children: [
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              const Text("Cheese Burger",
-                                                  style: TextStyle(
-                                                      fontSize: 13,
-                                                      fontWeight:
-                                                          FontWeight.w900,
-                                                      fontFamily: "Lexend")),
-                                              RichText(
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  maxLines: 2,
-                                                  text: TextSpan(children: [
-                                                    TextSpan(
-                                                        text: "Ingredients: ",
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .bodyMedium!
-                                                            .copyWith(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
-                                                    TextSpan(
-                                                        text:
-                                                            "Cheese, tomato, onion rings, mayonnaise.",
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .bodyMedium!
-                                                            .copyWith(
-                                                                color: Colors
-                                                                    .black54))
-                                                  ]))
-                                            ],
-                                          ),
-                                          const Spacer(),
-                                          const Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text("Rs. 250 -/",
-                                                    style: TextStyle(
-                                                        color: primaryColor,
-                                                        fontWeight:
-                                                            FontWeight.bold)),
-                                                Icon(Icons.add_box_sharp,
-                                                    color: primaryColor,
-                                                    size: 30)
-                                              ])
-                                        ]))
-                                  ]));
-                            }))
+                            itemBuilder: (context, index) => _items(context)))
                   ]))
             ]))
       ]),
@@ -217,6 +144,66 @@ class CafeDetailScreen extends StatelessWidget {
                 ]))
           ])))
     ]));
+  }
+
+  Widget _items(BuildContext context) {
+    return AppWidgetHelper.decoratedContainer(context,
+        padding: const EdgeInsets.only(left: 5, bottom: 5, top: 5),
+        height: 100,
+        child: Row(children: [
+          const Flexible(
+              fit: FlexFit.tight,
+              flex: 1,
+              child: SizedBox(
+                  height: double.infinity,
+                  child: DecoratedBox(
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image:
+                                  AssetImage("assets/images/splash.png")))))),
+          FixedGaps.horizontalGap5,
+          Flexible(
+              flex: 3,
+              child: Column(children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text("Cheese Burger",
+                        style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w900,
+                            fontFamily: "Lexend")),
+                    RichText(
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        text: TextSpan(children: [
+                          TextSpan(
+                              text: "Ingredients: ",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(fontWeight: FontWeight.bold)),
+                          TextSpan(
+                              text: "Cheese, tomato, onion rings, mayonnaise.",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(color: Colors.black54))
+                        ]))
+                  ],
+                ),
+                const Spacer(),
+                const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Rs. 250 -/",
+                          style: TextStyle(
+                              color: primaryColor,
+                              fontWeight: FontWeight.bold)),
+                      Icon(Icons.add_box_sharp, color: primaryColor, size: 30)
+                    ])
+              ]))
+        ]));
   }
 
   Widget _fitlerButtons(

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:rmo_food/config/routes_imports.dart';
 import 'package:rmo_food/core/theme/common_theme.dart';
+import 'package:rmo_food/src/pages/end_drawer/end_drawer.dart';
 import 'package:rmo_food/src/pages/services/cafe/presentation/cafe.dart';
 import 'package:rmo_food/src/pages/services/checkout/checkout.dart';
 import 'package:rmo_food/src/pages/services/home/home.dart';
 import 'package:rmo_food/src/pages/services/menu/menu.dart';
+
+GlobalKey<ScaffoldState>? scaffoldKey;
 
 class HomeNavigationScreen extends StatefulWidget {
   const HomeNavigationScreen({super.key});
@@ -27,6 +30,7 @@ class _HomeNavigationScreenState extends State<HomeNavigationScreen>
   @override
   void initState() {
     super.initState();
+    scaffoldKey = GlobalKey<ScaffoldState>();
     pageController = PageController()
       ..addListener(
           () => setState(() => currentIndex = pageController.page!.toInt()));
@@ -35,18 +39,27 @@ class _HomeNavigationScreenState extends State<HomeNavigationScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: scaffoldKey,
         body: PageView.builder(
             controller: pageController,
             itemCount: screens.length,
             itemBuilder: (context, index) => screens[index]),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: InkWell(
-            onTap: () => Navigator.pushNamed(context, Routes.qrScanner),
-            child: const CircleAvatar(
-                radius: 35,
-                backgroundColor: primaryColor,
-                child: Icon(Icons.qr_code_scanner,
-                    color: Colors.white, size: 45))),
+        floatingActionButton: Material(
+            color: primaryColor,
+            shape: const CircleBorder(),
+            child: InkWell(
+                customBorder: const CircleBorder(),
+                onTap: () => Navigator.pushNamed(context, Routes.qrScanner),
+                child: const CircleAvatar(
+                    radius: 35,
+                    backgroundColor: Colors.transparent,
+                    child: Icon(Icons.qr_code_scanner,
+                        color: Colors.white, size: 45)))),
+        drawer:
+            const Drawer(width: double.infinity, backgroundColor: primaryColor),
+        endDrawer: Container(
+            margin: const EdgeInsets.all(10), child: const CustomEndDrawer()),
         bottomNavigationBar: BottomAppBar(
             padding: EdgeInsets.zero,
             height: 60,
@@ -80,12 +93,9 @@ class _HomeNavigationScreenState extends State<HomeNavigationScreen>
                       label: "Menu",
                       color: currentIndex == 2 ? primaryColor : null),
                   handleBottomActiveIcon(
-                      onTap: () {
-                        currentIndex = 3;
-                        pageController.jumpToPage(currentIndex);
-                      },
-                      icon: Icons.shopping_cart_checkout,
-                      label: "Cart",
+                      onTap: () => scaffoldKey!.currentState!.openEndDrawer(),
+                      icon: Icons.view_module_rounded,
+                      label: "More",
                       color: currentIndex == 3 ? primaryColor : null)
                 ])));
   }

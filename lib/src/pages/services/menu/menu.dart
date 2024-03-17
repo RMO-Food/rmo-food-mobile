@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rmo_food/config/routes_imports.dart';
 import 'package:rmo_food/core/theme/common_theme.dart';
 import 'package:rmo_food/helper/custom_appbar.dart';
 import 'package:rmo_food/helper/gap.dart';
@@ -59,76 +58,73 @@ class MenuScreen extends StatelessWidget {
                       crossAxisSpacing: 20,
                       mainAxisSpacing: 10),
                   itemBuilder: (context, index) {
-                    return InkWell(
-                        onTap: () =>
-                            Navigator.pushNamed(context, Routes.cafeDetail),
-                        child: AppWidgetHelper.decoratedContainer(context,
-                            child: Column(children: [
-                              Flexible(
-                                  flex: 10,
-                                  child:
-                                      Stack(clipBehavior: Clip.none, children: [
-                                    Container(
-                                        decoration: const BoxDecoration(
-                                            borderRadius: BorderRadius.vertical(
-                                                top: Radius.circular(2)),
-                                            color: Colors.black,
-                                            image: DecorationImage(
-                                                image: AssetImage(
-                                                    "assets/images/splash.png")))),
-                                    Positioned(
-                                        left: -8,
-                                        top: 10,
-                                        child: Container(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 5, horizontal: 10),
-                                            decoration: BoxDecoration(
-                                                color: Colors.orange.shade800,
-                                                boxShadow: const [
-                                                  BoxShadow(
-                                                      color: Colors.black26,
-                                                      blurRadius: 4)
-                                                ]),
-                                            child: const Center(
-                                                child: Text("30%",
-                                                    style: TextStyle(
-                                                        color: Colors.white)))))
-                                  ])),
-                              const Flexible(
-                                  flex: 8,
-                                  child: Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 8.0),
-                                    child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
-                                        children: [
-                                          Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text("Chicken Burger",
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontFamily: "Lexend")),
-                                                Text("Rs. 220/-",
-                                                    style: TextStyle(
-                                                        color: Colors.black54,
-                                                        fontFamily: "Lexend"))
-                                              ]),
-                                          Spacer(),
-                                          Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              children: [
-                                                Icon(Icons.add_box_sharp,
-                                                    color: primaryColor,
-                                                    size: 30)
-                                              ])
-                                        ]),
-                                  ))
-                            ])));
+                    return AppWidgetHelper.decoratedContainer(context,
+                        child: Column(children: [
+                          Flexible(
+                              flex: 10,
+                              child: Stack(clipBehavior: Clip.none, children: [
+                                Container(
+                                    decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.vertical(
+                                            top: Radius.circular(2)),
+                                        image: DecorationImage(
+                                            image: AssetImage(
+                                                "assets/images/splash.png")))),
+                                Positioned(
+                                    left: -8,
+                                    top: 10,
+                                    child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 5, horizontal: 10),
+                                        decoration: BoxDecoration(
+                                            color: Colors.orange.shade800,
+                                            boxShadow: const [
+                                              BoxShadow(
+                                                  color: Colors.black26,
+                                                  blurRadius: 4)
+                                            ]),
+                                        child: const Center(
+                                            child: Text("30%",
+                                                style: TextStyle(
+                                                    color: Colors.white)))))
+                              ])),
+                          Flexible(
+                              flex: 8,
+                              child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
+                                  child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        const Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text("Chicken Burger",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontFamily: "Lexend")),
+                                              Text("Rs. 220/-",
+                                                  style: TextStyle(
+                                                      color: Colors.black54,
+                                                      fontFamily: "Lexend"))
+                                            ]),
+                                        const Spacer(),
+                                        Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              InkWell(
+                                                  onTap: () {},
+                                                  child: const Icon(
+                                                      Icons.add_box_sharp,
+                                                      color: primaryColor,
+                                                      size: 30))
+                                            ])
+                                      ])))
+                        ]));
                   }))
         ],
       ),

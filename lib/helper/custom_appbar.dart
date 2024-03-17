@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rmo_food/core/theme/common_theme.dart';
+import 'package:rmo_food/src/pages/bottom_nav/bottom_nav.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool? showSetting;
@@ -21,12 +22,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             leading: SizedBox(
                 width: 40,
                 height: 40,
-                child: leading ??
-                    const DecoratedBox(
-                        decoration: BoxDecoration(
-                            color: primaryColor,
-                            borderRadius: BorderRadius.all(Radius.circular(5))),
-                        child: Icon(Icons.person, color: Colors.white))),
+                child: InkWell(
+                  onTap: () {
+                    scaffoldKey?.currentState?.openDrawer();
+                  },
+                  child: leading ??
+                      const DecoratedBox(
+                          decoration: BoxDecoration(
+                              color: primaryColor,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5))),
+                          child: Icon(Icons.person, color: Colors.white)),
+                )),
             title: title ??
                 const Text("Hi, John",
                     style:
@@ -52,7 +59,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                                     ? Colors.black54
                                     : Colors.grey)),
                   )
-                : null));
+                : const SizedBox(width: 40)));
   }
 
   @override
