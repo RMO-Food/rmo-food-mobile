@@ -21,20 +21,6 @@ class ChekoutScreen extends StatelessWidget {
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               AppWidgetHelper.decoratedContainer(context,
-                  height: 270,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  child: SingleChildScrollView(
-                      child: Column(children: [
-                    _items(context),
-                    _items(context),
-                    _items(context),
-                    _items(context),
-                    _items(context),
-                    _items(context)
-                  ]))),
-              FixedGaps.verticalGap20,
-              AppWidgetHelper.decoratedContainer(context,
                   padding: const EdgeInsets.all(10),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,18 +51,39 @@ class ChekoutScreen extends StatelessWidget {
               const Text("Delivery Estimation",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
               AppWidgetHelper.decoratedContainer(context,
-                  child: const ListTile(
-                      leading: Icon(Icons.delivery_dining),
-                      title: Text("Estimation time"),
-                      subtitle: Text("30-40 mins"))),
-              const Spacer(),
+                  padding: const EdgeInsets.all(5),
+                  child: const Row(children: [
+                    Icon(Icons.delivery_dining),
+                    FixedGaps.horizontalGap10,
+                    Expanded(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                          Text("Estimation time",
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          Text("30-40 mins")
+                        ]))
+                  ])),
+              FixedGaps.verticalGap10,
+              Expanded(
+                  child: AppWidgetHelper.decoratedContainer(context,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
+                      child: SingleChildScrollView(
+                          child: Column(children: [
+                        _items(context),
+                        _items(context),
+                        _items(context),
+                        _items(context),
+                        _items(context),
+                        _items(context)
+                      ])))),
+              FixedGaps.verticalGap10,
               FullButton(
                   onPressed: () {
                     Navigator.pushNamed(context, Routes.confirmOrder);
                   },
-                  child: const Text("Proceed",
-                      style: TextStyle(
-                          color: Colors.white, fontFamily: "Lexend"))),
+                  btnName: "Proceed"),
               FixedGaps.verticalGap10
             ])));
   }

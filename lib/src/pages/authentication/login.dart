@@ -85,12 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         onPressed: () {
                                           formKey.currentState!.validate();
                                         },
-                                        child: Text("LOGIN",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyMedium!
-                                                .copyWith(
-                                                    color: Colors.white))),
+                                        btnName: "LOGIN"),
                                     const Spacer(),
                                     Row(
                                         mainAxisAlignment:

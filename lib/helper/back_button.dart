@@ -11,7 +11,13 @@ class AppBackButton extends StatelessWidget {
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
         padding: EdgeInsets.zero,
-        onPressed: onPressed ?? () => Navigator.pop(context),
+        onPressed: onPressed ??
+            () {
+              FocusScope.of(context).unfocus();
+              // to stop the issue when keyboard and screen pops at the same time.
+              Future.delayed(const Duration(milliseconds: 100))
+                  .whenComplete(() => Navigator.pop(context));
+            },
         icon: Icon(Icons.arrow_back_ios, size: size ?? 20));
   }
 }

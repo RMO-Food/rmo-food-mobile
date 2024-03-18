@@ -49,83 +49,160 @@ class MenuScreen extends StatelessWidget {
                       .toList())),
           FixedGaps.verticalGap10,
           Expanded(
-              child: GridView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  itemCount: 10,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      childAspectRatio: 1 / 1.04,
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 10),
+              child: ListView.separated(
+                  separatorBuilder: (context, index) =>
+                      const Divider(color: Colors.black12),
+                  itemCount: 20,
                   itemBuilder: (context, index) {
-                    return AppWidgetHelper.decoratedContainer(context,
-                        child: Column(children: [
-                          Flexible(
-                              flex: 10,
-                              child: Stack(clipBehavior: Clip.none, children: [
-                                Container(
-                                    decoration: const BoxDecoration(
-                                        borderRadius: BorderRadius.vertical(
-                                            top: Radius.circular(2)),
-                                        image: DecorationImage(
-                                            image: AssetImage(
-                                                "assets/images/splash.png")))),
-                                Positioned(
-                                    left: -8,
-                                    top: 10,
-                                    child: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 5, horizontal: 10),
-                                        decoration: BoxDecoration(
-                                            color: Colors.orange.shade800,
-                                            boxShadow: const [
-                                              BoxShadow(
-                                                  color: Colors.black26,
-                                                  blurRadius: 4)
-                                            ]),
-                                        child: const Center(
-                                            child: Text("30%",
-                                                style: TextStyle(
-                                                    color: Colors.white)))))
-                              ])),
-                          Flexible(
-                              flex: 8,
-                              child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
+                    return Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        // color: Colors.red,
+                        // height: 60, // 40 if no image
+                        child: Stack(children: [
+                          const Row(
+                            children: [
+                              Expanded(
                                   child: Column(
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                        const Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text("Chicken Burger",
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontFamily: "Lexend")),
-                                              Text("Rs. 220/-",
-                                                  style: TextStyle(
-                                                      color: Colors.black54,
-                                                      fontFamily: "Lexend"))
-                                            ]),
-                                        const Spacer(),
-                                        Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              InkWell(
-                                                  onTap: () {},
-                                                  child: const Icon(
-                                                      Icons.add_box_sharp,
-                                                      color: primaryColor,
-                                                      size: 30))
-                                            ])
-                                      ])))
+                                    Text("Chicken Burger",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                    // Text("Description"),
+                                    // FixedGaps.verticalGap10,
+                                    Text("Rs. 305 -/",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold))
+                                  ])),
+                              // SizedBox(height: 70, width: 70),
+                              // Container(
+                              //     height: 70,
+                              //     width: 70,
+                              //     decoration: const BoxDecoration(
+                              //         borderRadius: BorderRadius.vertical(
+                              //             top: Radius.circular(2)),
+                              //         image: DecorationImage(
+                              //             image: AssetImage(
+                              //                 "assets/images/splash.png")))),
+                            ],
+                          ),
+                          Align(
+                              alignment: Alignment.centerRight,
+                              child: InkWell(
+                                  onTap: () {},
+                                  child: AppWidgetHelper.decoratedContainer(
+                                      context,
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5, horizontal: 10),
+                                      borderRadius: 20,
+                                      child: const Text("ADD",
+                                          style: TextStyle(
+                                              color: primaryColor,
+                                              fontWeight: FontWeight.bold))))),
+                          // Align(
+                          //     alignment: Alignment.centerRight,
+                          //     child: InkWell(
+                          //         onTap: () {},
+                          //         child: AppWidgetHelper.decoratedContainer(
+                          //             context,
+                          //             padding: const EdgeInsets.all(3),
+                          //             borderRadius: 15,
+                          //             border: const Border.fromBorderSide(
+                          //                 BorderSide(color: primaryColor)),
+                          //             child: Row(
+                          //                 mainAxisSize: MainAxisSize.min,
+                          //                 children: [
+                          //                   InkWell(
+                          //                       onTap: () {},
+                          //                       child: const Icon(Icons.remove,
+                          //                           size: 18,
+                          //                           color: primaryColor)),
+                          //                   FixedGaps.horizontalGap10,
+                          //                   const Text("1",
+                          //                       style: TextStyle(
+                          //                           color: primaryColor)),
+                          //                   FixedGaps.horizontalGap10,
+                          //                   InkWell(
+                          //                       onTap: () {},
+                          //                       child: const Icon(Icons.add,
+                          //                           size: 18,
+                          //                           color: primaryColor))
+                          //                 ]))))
                         ]));
                   }))
+          // Expanded(
+          //     child: GridView.builder(
+          //         padding: const EdgeInsets.symmetric(horizontal: 10),
+          //         itemCount: 10,
+          //         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          //             childAspectRatio: 1 / 1.04,
+          //             crossAxisCount: 2,
+          //             crossAxisSpacing: 20,
+          //             mainAxisSpacing: 10),
+          //         itemBuilder: (context, index) {
+          //           return AppWidgetHelper.decoratedContainer(context,
+          //               margin: const EdgeInsets.only(top: 5),
+          //               child: Column(children: [
+          //                 Flexible(
+          //                     flex: 10,
+          //                     child: Stack(clipBehavior: Clip.none, children: [
+
+          //                       Container(
+          //                           padding: const EdgeInsets.symmetric(
+          //                               vertical: 5, horizontal: 10),
+          //                           decoration: BoxDecoration(
+          //                               color: Colors.orange.shade800,
+          //                               boxShadow: const [
+          //                                 BoxShadow(
+          //                                     color: Colors.black26,
+          //                                     blurRadius: 4)
+          //                               ]),
+          //                           child: const Center(
+          //                               child: Text("30%",
+          //                                   style: TextStyle(
+          //                                       color: Colors.white))))
+          //                     ])),
+          //                 Flexible(
+          //                     flex: 8,
+          //                     child: Padding(
+          //                         padding: const EdgeInsets.symmetric(
+          //                             horizontal: 8.0),
+          //                         child: Column(
+          //                             crossAxisAlignment:
+          //                                 CrossAxisAlignment.stretch,
+          //                             children: [
+          //                               const Column(
+          //                                   crossAxisAlignment:
+          //                                       CrossAxisAlignment.start,
+          //                                   children: [
+          //                                     Text("Chicken Burger",
+          //                                         style: TextStyle(
+          //                                             fontWeight:
+          //                                                 FontWeight.bold,
+          //                                             fontFamily: "Lexend")),
+          //                                     Text("Rs. 220/-",
+          //                                         style: TextStyle(
+          //                                             color: Colors.black54,
+          //                                             fontFamily: "Lexend"))
+          //                                   ]),
+          //                               const Spacer(),
+          //                               Row(
+          //                                   mainAxisAlignment:
+          //                                       MainAxisAlignment.end,
+          //                                   children: [
+          //                                     InkWell(
+          //                                         onTap: () {},
+          //                                         child: const Icon(
+          //                                             Icons.add_box_sharp,
+          //                                             color: primaryColor,
+          //                                             size: 30))
+          //                                   ])
+          //                             ])))
+          //               ]));
+          //         }))
         ],
       ),
     );

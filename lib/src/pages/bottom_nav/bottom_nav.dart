@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rmo_food/config/routes_imports.dart';
 import 'package:rmo_food/core/theme/common_theme.dart';
+import 'package:rmo_food/src/pages/drawer/drawer.dart';
 import 'package:rmo_food/src/pages/end_drawer/end_drawer.dart';
 import 'package:rmo_food/src/pages/services/cafe/presentation/cafe.dart';
 import 'package:rmo_food/src/pages/services/checkout/checkout.dart';
@@ -56,8 +57,7 @@ class _HomeNavigationScreenState extends State<HomeNavigationScreen>
                     backgroundColor: Colors.transparent,
                     child: Icon(Icons.qr_code_scanner,
                         color: Colors.white, size: 45)))),
-        drawer:
-            const Drawer(width: double.infinity, backgroundColor: primaryColor),
+        drawer: const CustomDrawer(),
         endDrawer: Container(
             margin: const EdgeInsets.all(10), child: const CustomEndDrawer()),
         bottomNavigationBar: BottomAppBar(

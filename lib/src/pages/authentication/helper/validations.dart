@@ -19,4 +19,9 @@ class FormValidation {
     if (value == null || value.isEmpty) return "*Required*";
     return null;
   }
+
+  static String? remarksValidation(String? value) {
+    if (value == null || value.isEmpty) return "*Required*";
+    return null;
+  }
 }
