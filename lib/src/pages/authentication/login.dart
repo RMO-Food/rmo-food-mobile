@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:rmo_food/core/theme/common_theme.dart';
+import 'package:rmo_food/helper/back_button.dart';
 import 'package:rmo_food/helper/gap.dart';
 import 'package:rmo_food/src/components/full_button.dart';
 import 'package:rmo_food/src/pages/authentication/helper/validations.dart';
@@ -26,8 +27,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(height: 20),
-                  SvgPicture.asset("assets/icons/splash.svg",
-                      color: Colors.red, height: 150, width: 150),
+                  Stack(
+                    children: [
+                      const Positioned(
+                          top: 30, left: 10, child: AppBackButton()),
+                      Align(
+                        alignment: Alignment.center,
+                        child: SvgPicture.asset("assets/icons/splash.svg",
+                            color: Colors.red, height: 150, width: 150),
+                      ),
+                    ],
+                  ),
                   Expanded(
                       child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -92,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             MainAxisAlignment.center,
                                         children: [
                                           SvgPicture.asset(
-                                              "assets/icons/splash.svg",
+                                              "assets/iaincons/splash.svg",
                                               color: Colors.red,
                                               height: 30,
                                               width: 30),

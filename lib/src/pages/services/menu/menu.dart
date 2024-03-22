@@ -58,7 +58,8 @@ class MenuScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 12),
                         // color: Colors.red,
                         // height: 60, // 40 if no image
-                        child: Stack(children: [
+                        child:
+                            Stack(alignment: Alignment.centerRight, children: [
                           const Row(
                             children: [
                               Expanded(
@@ -89,19 +90,16 @@ class MenuScreen extends StatelessWidget {
                               //                 "assets/images/splash.png")))),
                             ],
                           ),
-                          Align(
-                              alignment: Alignment.centerRight,
-                              child: InkWell(
-                                  onTap: () {},
-                                  child: AppWidgetHelper.decoratedContainer(
-                                      context,
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 5, horizontal: 10),
-                                      borderRadius: 20,
-                                      child: const Text("ADD",
-                                          style: TextStyle(
-                                              color: primaryColor,
-                                              fontWeight: FontWeight.bold))))),
+                          InkWell(
+                              onTap: () {},
+                              child: AppWidgetHelper.decoratedContainer(context,
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 5, horizontal: 10),
+                                  borderRadius: 20,
+                                  child: const Text("ADD",
+                                      style: TextStyle(
+                                          color: primaryColor,
+                                          fontWeight: FontWeight.bold)))),
                           // Align(
                           //     alignment: Alignment.centerRight,
                           //     child: InkWell(

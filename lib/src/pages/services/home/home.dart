@@ -23,7 +23,9 @@ class HomeScreen extends StatelessWidget {
                     FixedGaps.verticalGap5,
                     _title(
                         title: "Your Address",
-                        onTap: () {},
+                        onTap: () {
+                          AppWidgetHelper.showLoginDialog(context: context);
+                        },
                         txtBtnName: "Update"),
                     const ListTile(
                         contentPadding: EdgeInsets.zero,
