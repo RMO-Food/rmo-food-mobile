@@ -47,6 +47,7 @@ class _HomeNavigationScreenState extends State<HomeNavigationScreen>
             context: context, question: "Do you want to exit?");
       },
       child: Scaffold(
+          resizeToAvoidBottomInset: false,
           key: scaffoldKey,
           body: PageView.builder(
               controller: pageController,

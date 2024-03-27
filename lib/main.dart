@@ -4,13 +4,21 @@ import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rmo_food/bloc/login/login_bloc.dart';
 import 'package:rmo_food/config/routes_generate.dart';
+import 'package:rmo_food/core/dependencies/shared_pref.dart';
 import 'package:rmo_food/core/theme/dark_theme_data.dart';
 import 'package:rmo_food/core/theme/light_theme_data.dart';
+import 'package:rmo_food/locator/get_it.dart';
+import 'package:rmo_food/service/http_executer.dart';
+import 'package:rmo_food/service/i_server.dart';
 
-void main() {
+void main() async {
   runZonedGuarded(() {
     WidgetsFlutterBinding.ensureInitialized();
+    SharedPref.init();
+    setUpLocator();
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     runApp(const AppWrapper());
   }, (error, stack) {
@@ -26,13 +34,30 @@ class AppWrapper extends StatefulWidget {
 }
 
 class _AppWrapperState extends State<AppWrapper> {
+  void bootServer() {
+    if (kDebugMode) {
+      HttpExecuter.init(ITestServerImpl());
+    } else {
+      HttpExecuter.init(ITestServerImpl());
+      // HttpExecuter.init(ILiveServerImpl());
+    }
+  }
+
+  @override
+  void initState() {
+    bootServer();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: kDebugMode,
-        themeMode: ThemeMode.system,
-        theme: LightThemeData.themeData(),
-        darkTheme: DarkThemeData.themeData(),
-        onGenerateRoute: GeneratedRoute.generatedRoute);
+    return MultiBlocProvider(
+        providers: [BlocProvider(create: (context) => LoginBloc())],
+        child: MaterialApp(
+            debugShowCheckedModeBanner: kDebugMode,
+            themeMode: ThemeMode.system,
+            theme: LightThemeData.themeData(),
+            darkTheme: DarkThemeData.themeData(),
+            onGenerateRoute: GeneratedRoute.generatedRoute));
   }
 }
