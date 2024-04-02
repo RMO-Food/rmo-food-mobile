@@ -2,6 +2,9 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rmo_food/bloc/authentication/authentication_cubit.dart';
+import 'package:rmo_food/config/routes_generate.dart';
 import 'package:rmo_food/constants.dart';
 import 'package:rmo_food/core/dependencies/shared_pref.dart';
 import 'package:rmo_food/infrastructure/data/http_execute_dto.dart';
@@ -14,6 +17,7 @@ import 'package:rmo_food/service/i_server.dart';
 class HttpExecuter {
   static IServerStrategy? _iServerStrategy;
   static late HttpClient _client;
+  int retryCount = 0;
 
   HttpExecuter() {
     _client = HttpClient();
@@ -24,6 +28,50 @@ class HttpExecuter {
 
   static void init(IServerStrategy iServerStrategy) {
     _iServerStrategy = iServerStrategy;
+  }
+
+  Future<bool> refreshToken() async {
+    try {
+      final Uri finalUrl =
+          Uri.http(_iServerStrategy!.url, URLConst.REFRESH_TOKEN);
+      final HttpClientRequest request = await _client
+          .openUrl("POST", finalUrl)
+          .timeout(_client.connectionTimeout!)
+        ..headers.contentType = ContentType.json;
+      final data =
+          LoginToken.fromJson(jsonDecode(SharedPref.getToken!)).refreshToken;
+      request.write(jsonEncode({"refresh": data}));
+      final HttpClientResponse response = await request.close();
+      final responseBody = await response.transform(utf8.decoder).join();
+      Map<String, dynamic> verifiedToken = jsonDecode(responseBody);
+      verifiedToken.addAll({"refresh": data});
+      if (response.statusCode == 200) {
+        SharedPref.setToken(jsonEncode(verifiedToken));
+        return true;
+      }
+      return false;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> verifyToken() async {
+    try {
+      final Uri finalUrl =
+          Uri.http(_iServerStrategy!.url, URLConst.VERIFY_TOKEN);
+      final HttpClientRequest request = await _client
+          .openUrl("POST", finalUrl)
+          .timeout(_client.connectionTimeout!)
+        ..headers.contentType = ContentType.json;
+      final data =
+          LoginToken.fromJson(jsonDecode(SharedPref.getToken!)).accessToken;
+      request.write(jsonEncode({"token": data}));
+      final HttpClientResponse response = await request.close();
+      if (response.statusCode == 200) return true;
+      return await refreshToken();
+    } catch (e) {
+      return false;
+    }
   }
 
   Future<dynamic> finalExecution(HttpGetOrPostDataDto httpRequestData) async {
@@ -51,8 +99,20 @@ class HttpExecuter {
 
       final String responseString =
           await response.transform(utf8.decoder).join();
+      if (response.statusCode == 401 || response.statusCode == 402) {
+        final isRefreshed = await refreshToken();
+        if (!isRefreshed) {
+          _logOut();
+        } else {
+          if (retryCount < 3) {
+            retryCount += 1;
+            return finalExecution(httpRequestData);
+          }
+        }
+      }
       return responseString;
     } on SocketException catch (e) {
+      log(e.toString());
       return json.encode(
           {'detail': "Unable to Fetch Service.Please check your internet"});
     } catch (e) {
@@ -86,11 +146,21 @@ class HttpExecuter {
     }
   }
 
-  Future _setAuthorizationHeader(HttpClientRequest request) async {
+  Future _setAuthorizationHeader(HttpClientRequest request,
+      {bool? isRefresh = false}) async {
     final LoginToken token;
+    final String bearerToken;
     if (SharedPref.getToken != null) {
       token = LoginToken.fromJson(jsonDecode(SharedPref.getToken!));
-      request.headers.set(RMOConst.AUTHORIZATION, token.accessToken ?? "");
+      bearerToken =
+          "Bearer ${isRefresh! ? token.refreshToken : token.accessToken}";
+      request.headers.set(RMOConst.AUTHORIZATION, bearerToken);
     }
+  }
+
+  _logOut() {
+    BlocProvider.of<AuthenticationCubit>(
+            GeneratedRoute.navigatorKey.currentContext!)
+        .loggedOut();
   }
 }

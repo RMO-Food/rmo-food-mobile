@@ -6,7 +6,7 @@ class SharedPref {
   SharedPref._internal();
   factory SharedPref() => SharedPref._internal();
 
-  static void init() async {
+  static Future<void> init() async {
     _sharedPref = await SharedPreferences.getInstance();
   }
 

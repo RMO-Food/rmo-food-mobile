@@ -4,7 +4,7 @@ import 'package:rmo_food/core/theme/common_theme.dart';
 import 'package:rmo_food/helper/back_button.dart';
 import 'package:rmo_food/helper/gap.dart';
 import 'package:rmo_food/src/components/widget_helper.dart';
-import 'package:rmo_food/src/pages/services/menu/menu.dart';
+import 'package:rmo_food/src/pages/services/menu/presentation/menu.dart';
 
 class CafeDetailScreen extends StatelessWidget {
   const CafeDetailScreen({super.key});

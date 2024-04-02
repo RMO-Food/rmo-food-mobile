@@ -8,4 +8,9 @@ class URLConst {
 
   static const LOGIN = "/api/v1/auth-endpoint/login/";
   static const REGISTER = "/register";
+  static const CAFE_LIST = "/api/v1/customer-endpoint/cafe-list/";
+  static const MENU_LIST = "/api/v1/customer-endpoint/menu-list/";
+
+  static const REFRESH_TOKEN = "/api/v1/auth-endpoint/token/refresh/";
+  static const VERIFY_TOKEN = "/api/v1/auth-endpoint/token/verify/";
 }

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rmo_food/bloc/authentication/authentication_cubit.dart';
 import 'package:rmo_food/core/theme/common_theme.dart';
+import 'package:rmo_food/src/components/widget_helper.dart';
 import 'package:rmo_food/src/pages/bottom_nav/bottom_nav.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -24,7 +27,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 height: 40,
                 child: InkWell(
                   onTap: () {
-                    scaffoldKey?.currentState?.openDrawer();
+                    if (BlocProvider.of<AuthenticationCubit>(context).state
+                        is AuthenticationAuthenticated) {
+                      scaffoldKey?.currentState?.openDrawer();
+                    } else {
+                      AppWidgetHelper.showLoginDialog(context: context);
+                    }
                   },
                   child: leading ??
                       const DecoratedBox(

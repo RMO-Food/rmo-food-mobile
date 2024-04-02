@@ -15,5 +15,5 @@ Map<String, Function> getRoutes = {
   Routes.confirmOrder: (argument) => const ConfirmOrder(),
   Routes.home: (argument) => const HomeNavigationScreen(),
   Routes.loginScreen: (argument) => const LoginScreen(),
-  Routes.qrScanner: (argument) => QRscannerSreen()
+  Routes.qrScanner: (argument) => const QRscannerSreen()
 };

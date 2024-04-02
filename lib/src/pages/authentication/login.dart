@@ -2,13 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:rmo_food/bloc/authentication/authentication_cubit.dart';
 import 'package:rmo_food/bloc/login/login_bloc.dart';
 import 'package:rmo_food/core/theme/common_theme.dart';
-import 'package:rmo_food/helper/back_button.dart';
 import 'package:rmo_food/helper/gap.dart';
 import 'package:rmo_food/src/components/full_button.dart';
 import 'package:rmo_food/src/components/widget_helper.dart';
 import 'package:rmo_food/src/pages/authentication/helper/validations.dart';
+import 'package:rmo_food/src/pages/bottom_nav/bottom_nav.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -29,15 +30,21 @@ class _LoginScreenState extends State<LoginScreen> {
         listener: (context, state) {
           if (state is LoggingIn) {
             showDialog(
+                barrierDismissible: false,
                 context: context,
                 builder: (context) => const Dialog(
                     backgroundColor: Colors.transparent,
-                    child: CupertinoActivityIndicator(
-                      color: Colors.white,
-                    )));
+                    child: CupertinoActivityIndicator(color: Colors.white)));
           }
           if (state is LoggedIn) {
-            Navigator.popUntil(context, (route) => route.isFirst);
+            BlocProvider.of<AuthenticationCubit>(context).loggedIn();
+            Navigator.pop(context);
+            Navigator.of(context).pushReplacement(PageRouteBuilder(
+                pageBuilder: (context, animation, secondaryAnimation) =>
+                    const HomeNavigationScreen(),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) =>
+                        FadeTransition(opacity: animation, child: child)));
           }
           if (state is LogginError) {
             Navigator.pop(context);
@@ -53,17 +60,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       const SizedBox(height: 20),
-                      Stack(
-                        children: [
-                          const Positioned(
-                              top: 30, left: 10, child: AppBackButton()),
-                          Align(
-                            alignment: Alignment.center,
-                            child: SvgPicture.asset("assets/icons/splash.svg",
-                                color: Colors.red, height: 150, width: 150),
-                          ),
-                        ],
-                      ),
+                      SvgPicture.asset("assets/icons/splash.svg",
+                          color: Colors.red, height: 150, width: 150),
                       Expanded(
                           child: Padding(
                               padding:

@@ -5,11 +5,18 @@ import 'package:rmo_food/helper/custom_appbar.dart';
 import 'package:rmo_food/helper/gap.dart';
 import 'package:rmo_food/src/components/widget_helper.dart';
 
-class CafeScreen extends StatelessWidget {
+class CafeScreen extends StatefulWidget {
   const CafeScreen({super.key});
 
   @override
+  State<CafeScreen> createState() => _CafeScreenState();
+}
+
+class _CafeScreenState extends State<CafeScreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
         appBar: const CustomAppBar(
             title: Text("Restaurants",
@@ -82,4 +89,7 @@ class CafeScreen extends StatelessWidget {
                   );
                 })));
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
