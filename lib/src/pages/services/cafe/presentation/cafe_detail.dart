@@ -84,7 +84,8 @@ class CafeDetailScreen extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 CupertinoPageRoute(
-                                    builder: (context) => const MenuScreen()));
+                                    builder: (context) =>
+                                        const MenuScreen(showAppBar: false)));
                           },
                           child: const Row(
                               crossAxisAlignment: CrossAxisAlignment.end,

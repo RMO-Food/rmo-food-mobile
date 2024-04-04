@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rmo_food/core/theme/common_theme.dart';
 import 'package:rmo_food/helper/custom_appbar.dart';
+import 'package:rmo_food/helper/error_message.dart';
 import 'package:rmo_food/helper/gap.dart';
 import 'package:rmo_food/helper/loading_bar.dart';
 import 'package:rmo_food/src/components/widget_helper.dart';
@@ -9,7 +10,8 @@ import 'package:rmo_food/src/pages/services/menu/bloc/menu_item/menu_item_cubit.
 import 'package:rmo_food/src/pages/services/menu/data/model/menu.dart';
 
 class MenuScreen extends StatefulWidget {
-  const MenuScreen({super.key});
+  final bool? showAppBar;
+  const MenuScreen({super.key, this.showAppBar = true});
 
   @override
   State<MenuScreen> createState() => _MenuScreenState();
@@ -32,29 +34,20 @@ class _MenuScreenState extends State<MenuScreen>
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      appBar: const CustomAppBar(
-          title: Text("Menu",
-              style: TextStyle(fontSize: 18, color: primaryColor),
-              textAlign: TextAlign.center)),
+      appBar: widget.showAppBar!
+          ? const CustomAppBar(
+              title: Text("Menu",
+                  style: TextStyle(fontSize: 18, color: primaryColor),
+                  textAlign: TextAlign.center))
+          : null,
       body: BlocBuilder<MenuItemCubit, MenuItemState>(
         builder: (context, state) {
-          if (state is MenuItemFetching) {
-            return const ScreenLoadingIndicator();
-          }
+          if (state is MenuItemFetching) return const ScreenLoadingIndicator();
           if (state is MenuItemFetchError) {
-            return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    const Text("Refresh"),
-                    IconButton(
-                        onPressed: BlocProvider.of<MenuItemCubit>(context)
-                            .fetchMenuItem,
-                        icon: const Icon(Icons.refresh))
-                  ]),
-                  const Text("There might be issue please retry again.")
-                ]);
+            return ErrorMessage(
+                onPressed:
+                    BlocProvider.of<MenuItemCubit>(context).fetchMenuItem,
+                errorMessage: state.errorMessage);
           }
           if (state is MenuItemFetched) {
             final menuModel = state.menuModel;

@@ -14,6 +14,8 @@ import 'package:rmo_food/core/theme/light_theme_data.dart';
 import 'package:rmo_food/locator/get_it.dart';
 import 'package:rmo_food/service/http_executer.dart';
 import 'package:rmo_food/service/i_server.dart';
+import 'package:rmo_food/src/pages/services/cafe/bloc/cafe_cubit/cafe_cubit.dart';
+import 'package:rmo_food/src/pages/services/menu/bloc/menu_item/menu_item_cubit.dart';
 
 void main() async {
   runZonedGuarded(() async {
@@ -55,7 +57,9 @@ class _AppWrapperState extends State<AppWrapper> {
     return MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => LoginBloc()),
-          BlocProvider(create: (context) => AuthenticationCubit())
+          BlocProvider(create: (context) => AuthenticationCubit()),
+          BlocProvider(create: (context) => CafeCubit()),
+          BlocProvider(create: (context) => MenuItemCubit())
         ],
         child: MaterialApp(
             navigatorKey: GeneratedRoute.navigatorKey,

@@ -42,14 +42,14 @@ class HttpExecuter {
           LoginToken.fromJson(jsonDecode(SharedPref.getToken!)).refreshToken;
       request.write(jsonEncode({"refresh": data}));
       final HttpClientResponse response = await request.close();
+
+      if (response.statusCode != 200) return false;
+
       final responseBody = await response.transform(utf8.decoder).join();
       Map<String, dynamic> verifiedToken = jsonDecode(responseBody);
       verifiedToken.addAll({"refresh": data});
-      if (response.statusCode == 200) {
-        SharedPref.setToken(jsonEncode(verifiedToken));
-        return true;
-      }
-      return false;
+      SharedPref.setToken(jsonEncode(verifiedToken));
+      return true;
     } catch (e) {
       return false;
     }
@@ -117,7 +117,7 @@ class HttpExecuter {
           {'detail': "Unable to Fetch Service.Please check your internet"});
     } catch (e) {
       log(e.toString());
-      return json.encode({'detail': "Something went wrong"});
+      return json.encode({'detail': RMOConst.defaultError});
     }
   }
 

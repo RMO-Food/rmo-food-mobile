@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:rmo_food/constants.dart';
 import 'package:rmo_food/infrastructure/endpoints.dart';
 import 'package:rmo_food/infrastructure/repository/http_api_repo_impl.dart';
 import 'package:rmo_food/locator/get_it.dart';
@@ -28,7 +29,7 @@ class MenuItemCubit extends Cubit<MenuItemState> {
       emit(MenuItemFetchError(e.toString()));
     } catch (e) {
       log(e.toString());
-      emit(MenuItemFetchError("Something went wrong"));
+      emit(MenuItemFetchError(RMOConst.defaultError));
     }
   }
 }
