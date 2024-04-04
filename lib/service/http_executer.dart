@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rmo_food/bloc/authentication/authentication_cubit.dart';
 import 'package:rmo_food/config/routes_generate.dart';
@@ -75,6 +76,15 @@ class HttpExecuter {
   }
 
   Future<dynamic> finalExecution(HttpGetOrPostDataDto httpRequestData) async {
+    JsonDecoder decoder = const JsonDecoder();
+    JsonEncoder encoder = const JsonEncoder.withIndent('  ');
+
+    void prettyPrintJson(String input) {
+      var object = decoder.convert(input);
+      var prettyString = encoder.convert(object);
+      prettyString.split('\n').forEach((element) => debugPrint(element));
+    }
+
     try {
       final Uri? finalUrl;
       if (httpRequestData.query != null && httpRequestData.query!.isNotEmpty) {
@@ -95,11 +105,14 @@ class HttpExecuter {
         request.write(httpRequestData.data);
       }
 
+      log("[Accessing] [${httpRequestData.method}] [${finalUrl.toString()}]");
+
       final HttpClientResponse response = await request.close();
 
       final String responseString =
           await response.transform(utf8.decoder).join();
       if (response.statusCode == 401 || response.statusCode == 402) {
+        log("[Warning] [${httpRequestData.method}] [${finalUrl.toString()}] ");
         final isRefreshed = await refreshToken();
         if (!isRefreshed) {
           _logOut();
@@ -110,6 +123,10 @@ class HttpExecuter {
           }
         }
       }
+      log("[Completed Requested] [${httpRequestData.method}] [${response.statusCode}] [${finalUrl.toString()}]");
+
+      if (kDebugMode) prettyPrintJson(responseString);
+
       return responseString;
     } on SocketException catch (e) {
       log(e.toString());

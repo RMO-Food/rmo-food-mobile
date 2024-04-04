@@ -42,7 +42,10 @@ class _MenuScreenState extends State<MenuScreen>
           : null,
       body: BlocBuilder<MenuItemCubit, MenuItemState>(
         builder: (context, state) {
-          if (state is MenuItemFetching) return const ScreenLoadingIndicator();
+          if (state is MenuItemFetching) {
+            _selectedCategory = -1;
+            return const ScreenLoadingIndicator();
+          }
           if (state is MenuItemFetchError) {
             return ErrorMessage(
                 onPressed:
