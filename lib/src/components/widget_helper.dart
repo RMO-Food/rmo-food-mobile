@@ -8,17 +8,21 @@ import 'package:rmo_food/src/components/full_button.dart';
 class AppWidgetHelper {
   static Widget decoratedContainer(BuildContext context,
       {required Widget child,
+      Alignment? alignment,
       double? height,
       double? width,
       Color? color,
       EdgeInsets? padding,
       EdgeInsets? margin,
       double? borderRadius,
+      DecorationImage? image,
       Border? border}) {
     return Container(
+        alignment: alignment,
         margin: margin,
         padding: padding,
         decoration: BoxDecoration(
+            image: image,
             border: border,
             color: color ?? Theme.of(context).scaffoldBackgroundColor,
             borderRadius: BorderRadius.circular(borderRadius ?? 2),

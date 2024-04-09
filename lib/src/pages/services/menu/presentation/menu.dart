@@ -8,6 +8,7 @@ import 'package:rmo_food/helper/loading_bar.dart';
 import 'package:rmo_food/src/components/widget_helper.dart';
 import 'package:rmo_food/src/pages/services/menu/bloc/menu_item/menu_item_cubit.dart';
 import 'package:rmo_food/src/pages/services/menu/data/model/menu.dart';
+import 'package:shimmer/shimmer.dart';
 
 class MenuScreen extends StatefulWidget {
   final bool? showAppBar;
@@ -42,10 +43,7 @@ class _MenuScreenState extends State<MenuScreen>
           : null,
       body: BlocBuilder<MenuItemCubit, MenuItemState>(
         builder: (context, state) {
-          if (state is MenuItemFetching) {
-            _selectedCategory = -1;
-            return const ScreenLoadingIndicator();
-          }
+          if (state is MenuItemFetching) return const ScreenLoadingIndicator();
           if (state is MenuItemFetchError) {
             return ErrorMessage(
                 onPressed:
@@ -87,6 +85,7 @@ class _MenuScreenState extends State<MenuScreen>
                 Expanded(
                     child: RefreshIndicator(
                   onRefresh: () async {
+                    _selectedCategory = -1;
                     BlocProvider.of<MenuItemCubit>(context).fetchMenuItem();
                   },
                   child: menuCategories
@@ -283,4 +282,41 @@ class _MenuScreenState extends State<MenuScreen>
 
   @override
   bool get wantKeepAlive => true;
+}
+
+class MenuShimmerLoading extends StatelessWidget {
+  const MenuShimmerLoading({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+      SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          physics: const NeverScrollableScrollPhysics(),
+          child: Row(children: [
+            for (int i = 0; i < 10; i++) ...{
+              AppWidgetHelper.decoratedContainer(context,
+                  margin: const EdgeInsets.only(left: 10, bottom: 10),
+                  child: Shimmer.fromColors(
+                      baseColor: Colors.grey.shade200,
+                      highlightColor: Colors.grey.shade100,
+                      child: Container(
+                          height: 40, width: 100, color: Colors.grey.shade300)))
+            }
+          ])),
+      Expanded(
+          child: ListView.separated(
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) =>
+                  AppWidgetHelper.decoratedContainer(context,
+                      margin: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Shimmer.fromColors(
+                          baseColor: Colors.grey.shade200,
+                          highlightColor: Colors.grey.shade100,
+                          child: Container(
+                              height: 50, color: Colors.grey.shade100))),
+              separatorBuilder: (context, index) => FixedGaps.verticalGap10,
+              itemCount: 15))
+    ]);
+  }
 }

@@ -11,7 +11,8 @@ class Routes {
 
 Map<String, Function> getRoutes = {
   Routes.initial: (argument) => const SplashScreen(),
-  Routes.cafeDetail: (argument) => const CafeDetailScreen(),
+  Routes.cafeDetail: (argument) =>
+      CafeDetailScreen(cafeDatum: argument?['cafeDatum']),
   Routes.confirmOrder: (argument) => const ConfirmOrder(),
   Routes.home: (argument) => const HomeNavigationScreen(),
   Routes.loginScreen: (argument) => const LoginScreen(),

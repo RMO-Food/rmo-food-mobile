@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:rmo_food/bloc/authentication/authentication_cubit.dart';
 import 'package:rmo_food/src/pages/authentication/login.dart';
 import 'package:rmo_food/src/pages/bottom_nav/bottom_nav.dart';
+import 'package:rmo_food/src/pages/services/profile/bloc/profile_bloc.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -43,6 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
         body: BlocBuilder<AuthenticationCubit, AuthenticationState>(
           builder: (context, state) {
             if (state is AuthenticationAuthenticated) {
+              BlocProvider.of<ProfileBloc>(context).add(FetchProfile());
               completeSplash(
                   context: context, seconds: 1, isAuthenticated: true);
             }

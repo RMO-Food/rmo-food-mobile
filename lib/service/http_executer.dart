@@ -41,6 +41,7 @@ class HttpExecuter {
         ..headers.contentType = ContentType.json;
       final data =
           LoginToken.fromJson(jsonDecode(SharedPref.getToken!)).refreshToken;
+      debugPrint(data);
       request.write(jsonEncode({"refresh": data}));
       final HttpClientResponse response = await request.close();
 

@@ -3,6 +3,7 @@ import 'package:rmo_food/core/theme/common_theme.dart';
 import 'package:rmo_food/helper/back_button.dart';
 import 'package:rmo_food/helper/gap.dart';
 import 'package:rmo_food/src/components/widget_helper.dart';
+import 'package:rmo_food/src/pages/authentication/login.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -125,17 +126,28 @@ class CustomDrawer extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                             InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  AppWidgetHelper.confirmationDialog(
+                                      context: context,
+                                      onConfirm: () {
+                                        Navigator.pop(context);
+                                        Navigator.pushReplacement(context,
+                                            MaterialPageRoute(
+                                                builder: (context) {
+                                          return const LoginScreen();
+                                        }));
+                                      },
+                                      question:
+                                          "Are you sure you want to log out?");
+                                },
                                 child: Padding(
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 10),
                                   child: Row(children: [
                                     Transform.rotate(
                                         angle: 3.14,
-                                        child: InkWell(
-                                            onTap: () {},
-                                            child: const Icon(Icons.logout,
-                                                color: primaryColor))),
+                                        child: const Icon(Icons.logout,
+                                            color: primaryColor)),
                                     FixedGaps.horizontalGap10,
                                     const Expanded(
                                         child: Column(
@@ -145,23 +157,27 @@ class CustomDrawer extends StatelessWidget {
                                   ]),
                                 ))
                           ]))),
-                  const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10.0),
+                  Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10.0),
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Padding(
-                                padding: EdgeInsets.only(left: 10),
-                                child: Text("data")),
-                            Padding(
-                                padding: EdgeInsets.only(left: 10),
-                                child: Text("data")),
-                            Padding(
-                                padding: EdgeInsets.only(left: 10),
-                                child: Text("data")),
-                            Padding(
-                                padding: EdgeInsets.only(left: 10),
-                                child: Text("data"))
+                            InkWell(
+                                onTap: () {},
+                                child: Image.asset("assets/images/facebook.png",
+                                    height: 30, width: 30)),
+                            FixedGaps.horizontalGap20,
+                            InkWell(
+                                onTap: () {},
+                                child: Image.asset(
+                                    "assets/images/instagram.png",
+                                    height: 30,
+                                    width: 30)),
+                            FixedGaps.horizontalGap20,
+                            InkWell(
+                                onTap: () {},
+                                child: Image.asset("assets/images/twitter.png",
+                                    height: 30, width: 30))
                           ])),
                   const Text("Version 1.0.0")
                 ]))));

@@ -4,10 +4,12 @@ import 'package:rmo_food/core/theme/common_theme.dart';
 import 'package:rmo_food/helper/back_button.dart';
 import 'package:rmo_food/helper/gap.dart';
 import 'package:rmo_food/src/components/widget_helper.dart';
+import 'package:rmo_food/src/pages/services/cafe/data/model/cafe.dart';
 import 'package:rmo_food/src/pages/services/menu/presentation/menu.dart';
 
 class CafeDetailScreen extends StatelessWidget {
-  const CafeDetailScreen({super.key});
+  final CafeDatum cafeDatum;
+  const CafeDetailScreen({super.key, required this.cafeDatum});
 
   @override
   Widget build(BuildContext context) {
@@ -73,12 +75,11 @@ class CafeDetailScreen extends StatelessWidget {
                     child: const AppBackButton(size: 18))),
             FixedGaps.verticalGap30,
             AppWidgetHelper.decoratedContainer(context,
-                height: 170,
                 width: 350,
                 child: Column(children: [
                   ListTile(
-                      title: const Text("Trisara"),
-                      subtitle: const Text("Kathmandu, Durbar marg"),
+                      title: Text("${cafeDatum.name?.toUpperCase()}"),
+                      subtitle: Text("${cafeDatum.address}"),
                       trailing: InkWell(
                           onTap: () {
                             Navigator.push(
@@ -98,7 +99,9 @@ class CafeDetailScreen extends StatelessWidget {
                                 Icon(Icons.arrow_forward_ios,
                                     size: 14, color: primaryColor)
                               ]))),
-                  Expanded(
+                  // if (cafeDatum.image != null)
+                  SizedBox(
+                      height: 80,
                       child: Padding(
                           padding: const EdgeInsets.only(
                               left: 14.0, bottom: 14.0, right: 14.0),
@@ -132,16 +135,16 @@ class CafeDetailScreen extends StatelessWidget {
                                                     Text("20% for more than 5"
                                                         " thousand bill."))
                                           ]);
-                                        })),
-                                const Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Icon(Icons.timelapse_rounded,
-                                          size: 15, color: primaryColor),
-                                      Text("8am - 9pm"),
-                                      FixedGaps.horizontalGap10
-                                    ])
-                              ])))
+                                        }))
+                              ]))),
+                  const Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Icon(Icons.timelapse_rounded,
+                            size: 15, color: primaryColor),
+                        Text("8am - 9pm"),
+                        FixedGaps.horizontalGap10
+                      ])
                 ]))
           ])))
     ]));
@@ -166,33 +169,30 @@ class CafeDetailScreen extends StatelessWidget {
           Flexible(
               flex: 3,
               child: Column(children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text("Cheese Burger",
-                        style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w900,
-                            fontFamily: "Lexend")),
-                    RichText(
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        text: TextSpan(children: [
-                          TextSpan(
-                              text: "Ingredients: ",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(fontWeight: FontWeight.bold)),
-                          TextSpan(
-                              text: "Cheese, tomato, onion rings, mayonnaise.",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(color: Colors.black54))
-                        ]))
-                  ],
-                ),
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  const Text("Cheese Burger",
+                      style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w900,
+                          fontFamily: "Lexend")),
+                  RichText(
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                      text: TextSpan(children: [
+                        TextSpan(
+                            text: "Ingredients: ",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(fontWeight: FontWeight.bold)),
+                        TextSpan(
+                            text: "Cheese, tomato, onion rings, mayonnaise.",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(color: Colors.black54))
+                      ]))
+                ]),
                 const Spacer(),
                 const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
