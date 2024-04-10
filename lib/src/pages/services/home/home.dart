@@ -27,8 +27,7 @@ class _HomeScreen extends StatefulWidget {
   State<_HomeScreen> createState() => __HomeScreenState();
 }
 
-class __HomeScreenState extends State<_HomeScreen>
-    with AutomaticKeepAliveClientMixin {
+class __HomeScreenState extends State<_HomeScreen> {
   late final OrderflowCubit orderflowCubit;
 
   @override
@@ -40,7 +39,6 @@ class __HomeScreenState extends State<_HomeScreen>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return Scaffold(
         appBar: const CustomAppBar(subtitle: Text("Dashboard")),
         body: ListView(
@@ -148,7 +146,7 @@ class __HomeScreenState extends State<_HomeScreen>
     ]);
   }
 
-  @override
-  // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
+  // @override
+  // // TODO: implement wantKeepAlive
+  // bool get wantKeepAlive => true;
 }

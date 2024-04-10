@@ -39,8 +39,8 @@ class HttpExecuter {
           .openUrl("POST", finalUrl)
           .timeout(_client.connectionTimeout!)
         ..headers.contentType = ContentType.json;
-      final data =
-          LoginToken.fromJson(jsonDecode(SharedPref.getToken!)).refreshToken;
+      final data = LoginToken.fromJson(jsonDecode(SharedPref.getToken ?? ""))
+          .refreshToken;
       debugPrint(data);
       request.write(jsonEncode({"refresh": data}));
       final HttpClientResponse response = await request.close();
@@ -157,10 +157,9 @@ class HttpExecuter {
       SharedPref.setToken(responseString);
       return responseString;
     } on SocketException catch (error) {
-      return jsonEncode(
-          {'detail': "Unable to Fetch Service.Please check your internet"});
+      return ErrorRes.error({'detail': error.message});
     } catch (e) {
-      return ErrorRes.error(jsonDecode(responseString));
+      return ErrorRes.error({'detail': e.toString()});
     }
   }
 

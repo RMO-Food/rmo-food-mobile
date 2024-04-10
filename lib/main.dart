@@ -66,7 +66,7 @@ class _AppWrapperState extends State<AppWrapper> {
         child: MaterialApp(
             navigatorKey: GeneratedRoute.navigatorKey,
             debugShowCheckedModeBanner: kDebugMode,
-            themeMode: ThemeMode.system,
+            // themeMode: ThemeMode.dark,
             theme: LightThemeData.themeData(),
             darkTheme: DarkThemeData.themeData(),
             onGenerateRoute: GeneratedRoute.generatedRoute));

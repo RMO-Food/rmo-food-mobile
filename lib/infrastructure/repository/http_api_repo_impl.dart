@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:rmo_food/core/error_handler.dart';
 import 'package:rmo_food/infrastructure/data/http_execute_dto.dart';
 import 'package:rmo_food/infrastructure/repository/http_api_repo.dart';
@@ -18,8 +20,8 @@ class HttpApiRepoImpl implements HttpApiRepo {
         method: method, path: path, query: query ?? {}, data: data);
     final responseData =
         await httpExecuter.finalExecution(httpGetOrPostDataDto);
-    errorMessage = "";
-    // errorHandler.getValidationMessage(jsonDecode(responseData ?? '{}'));
+    errorMessage =
+        errorHandler.getValidationMessage(jsonDecode(responseData ?? '{}'));
     try {
       if (errorMessage.isNotEmpty) throw errorMessage;
       return responseData;

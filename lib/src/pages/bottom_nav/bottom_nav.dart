@@ -50,11 +50,14 @@ class _HomeNavigationScreenState extends State<HomeNavigationScreen>
       },
       child: BlocListener<AuthenticationCubit, AuthenticationState>(
         listener: (context, state) {
+          // this state is to redirect user to loggin page
+          // if tokens are expired
           if (state is AuthenticationUnAuthenticated) {
-            ScaffoldMessenger.of(context).showMaterialBanner(
-                const MaterialBanner(
-                    content: Text("Unauthenticated"), actions: []));
-            Navigator.of(context).popUntil((route) => route.isFirst);
+            // Navigator.of(context)
+            //     .pushReplacement(MaterialPageRoute(builder: (context) {
+            //   return const LoginScreen();
+            // }));
+            // Navigator.of(context).popUntil((route) => route.isFirst);
           }
         },
         child: Scaffold(
