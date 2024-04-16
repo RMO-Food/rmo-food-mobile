@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:rmo_food/config/routes_imports.dart';
@@ -126,7 +127,7 @@ class AppWidgetHelper {
                   child: Column(mainAxisSize: MainAxisSize.min, children: [
                     SvgPicture.asset("assets/icons/splash.svg",
                         height: 70, width: 70, color: primaryColor),
-                    Text(question, textAlign: TextAlign.center),
+                    Text(question.tr(), textAlign: TextAlign.center),
                     FixedGaps.verticalGap10,
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -144,8 +145,8 @@ class AppWidgetHelper {
                                     confirm = false;
                                     Navigator.pop(context);
                                   },
-                              child: const Text("No",
-                                  style: TextStyle(
+                              child: Text("No".tr(),
+                                  style: const TextStyle(
                                       color: primaryColor,
                                       fontFamily: "Lexend",
                                       fontWeight: FontWeight.bold))),
@@ -163,8 +164,8 @@ class AppWidgetHelper {
                                     confirm = true;
                                     Navigator.of(context).pop(true);
                                   },
-                              child: const Text("Yes",
-                                  style: TextStyle(
+                              child: Text("Yes".tr(),
+                                  style: const TextStyle(
                                       color: Colors.white,
                                       fontFamily: "Lexend",
                                       fontWeight: FontWeight.bold)))

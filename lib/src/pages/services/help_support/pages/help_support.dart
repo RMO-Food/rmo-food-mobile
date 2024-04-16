@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rmo_food/core/dependencies/launch_url.dart';
 import 'package:rmo_food/helper/back_button.dart';
 import 'package:rmo_food/helper/gap.dart';
 import 'package:rmo_food/src/components/widget_helper.dart';
@@ -31,19 +32,27 @@ class HelpAndSupport extends StatelessWidget {
                         style: TextStyle(fontWeight: FontWeight.bold)),
                     const Divider(color: Colors.black12),
                     _supportWidgets(
-                        onTap: () {},
+                        onTap: () {
+                          "viber://forward?text=asdasdsa".launchApp();
+                        },
                         image: "assets/images/viber.png",
                         text: "Viber"),
                     _supportWidgets(
-                        onTap: () {},
+                        onTap: () {
+                          "m.me".launchApp();
+                        },
                         image: "assets/images/facebook.png",
                         text: "Facebook messenger"),
                     _supportWidgets(
-                        onTap: () {},
+                        onTap: () {
+                          "whatsapp://wa.me/?text='asdad'".launchApp();
+                        },
                         image: "assets/images/whatsapp.png",
                         text: "WhatsApp"),
                     _supportWidgets(
-                        onTap: () {},
+                        onTap: () {
+                          "www.facebook.com".launchApp();
+                        },
                         image: "assets/images/phone.png",
                         text: "1660193029 (Toll Free)"),
                     _supportWidgets(

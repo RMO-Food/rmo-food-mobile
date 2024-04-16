@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rmo_food/bloc/authentication/authentication_cubit.dart';
@@ -104,7 +105,7 @@ class _HomeNavigationScreenState extends State<HomeNavigationScreen>
                             pageController.jumpToPage(currentIndex);
                           },
                           icon: Icons.home,
-                          label: "Home",
+                          label: "Home".tr(),
                           color: currentIndex == 0 ? primaryColor : null),
                       handleBottomActiveIcon(
                           onTap: () {
@@ -112,7 +113,7 @@ class _HomeNavigationScreenState extends State<HomeNavigationScreen>
                             pageController.jumpToPage(currentIndex);
                           },
                           icon: Icons.restaurant_rounded,
-                          label: "Cafe",
+                          label: "Cafe".tr(),
                           color: currentIndex == 1 ? primaryColor : null),
                       const SizedBox(),
                       handleBottomActiveIcon(
@@ -121,13 +122,13 @@ class _HomeNavigationScreenState extends State<HomeNavigationScreen>
                             pageController.jumpToPage(currentIndex);
                           },
                           icon: Icons.menu_book,
-                          label: "Menu",
+                          label: "Menu".tr(),
                           color: currentIndex == 2 ? primaryColor : null),
                       handleBottomActiveIcon(
                           onTap: () =>
                               scaffoldKey!.currentState!.openEndDrawer(),
                           icon: Icons.view_module_rounded,
-                          label: "More",
+                          label: "More".tr(),
                           color: currentIndex == 3 ? primaryColor : null)
                     ]))),
       ),

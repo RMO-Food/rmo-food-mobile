@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,10 +22,16 @@ import 'package:rmo_food/src/pages/services/profile/bloc/profile_bloc.dart';
 void main() async {
   runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
+    await EasyLocalization.ensureInitialized();
     await SharedPref.init();
     setUpLocator();
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    runApp(const AppWrapper());
+    runApp(EasyLocalization(
+        saveLocale: true,
+        supportedLocales: const [Locale('ne', 'NE'), Locale('en', 'US')],
+        fallbackLocale: const Locale('en', 'US'),
+        path: 'assets/language',
+        child: const AppWrapper()));
   }, (error, stack) {
     log(error.toString());
   });
@@ -64,6 +71,9 @@ class _AppWrapperState extends State<AppWrapper> {
           BlocProvider(create: (context) => ProfileBloc())
         ],
         child: MaterialApp(
+            locale: context.locale,
+            supportedLocales: context.supportedLocales,
+            localizationsDelegates: context.localizationDelegates,
             navigatorKey: GeneratedRoute.navigatorKey,
             debugShowCheckedModeBanner: kDebugMode,
             // themeMode: ThemeMode.dark,

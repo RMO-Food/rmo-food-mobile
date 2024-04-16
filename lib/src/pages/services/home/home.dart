@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -72,8 +73,8 @@ class __HomeScreenState extends State<_HomeScreen> {
                     Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: _title(
-                            title: "On The Way Orders",
-                            txtBtnName: "View More",
+                            title: "onTheWayOrder",
+                            txtBtnName: "See All",
                             onTap: () {
                               Navigator.push(context,
                                   CupertinoPageRoute(builder: (context) {
@@ -95,8 +96,8 @@ class __HomeScreenState extends State<_HomeScreen> {
                   child: Column(children: [
                     FixedGaps.verticalGap5,
                     _title(
-                        title: "Recent Completed Orders",
-                        txtBtnName: "View All",
+                        title: "recentOrders",
+                        txtBtnName: "See All",
                         onTap: () {}),
                     FixedGaps.verticalGap10,
                     Expanded(
@@ -130,7 +131,7 @@ class __HomeScreenState extends State<_HomeScreen> {
       required String txtBtnName,
       required Function() onTap}) {
     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      Text(title).title(fontSize: 17, letterSpacing: -.5),
+      Text(title.tr()).title(fontSize: 17, letterSpacing: -.5),
       Material(
           color: Colors.transparent,
           child: InkWell(
@@ -139,7 +140,8 @@ class __HomeScreenState extends State<_HomeScreen> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(txtBtnName).title(color: primaryColor, fontSize: 13),
+                    Text(txtBtnName.tr())
+                        .title(color: primaryColor, fontSize: 13),
                     const Icon(Icons.arrow_forward_ios_sharp,
                         size: 13, color: primaryColor)
                   ])))

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:rmo_food/config/routes_imports.dart';
 import 'package:rmo_food/core/theme/common_theme.dart';
@@ -46,8 +47,9 @@ class CustomDrawer extends StatelessWidget {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                        const Text("ACCOUNT",
-                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        Text("acc".tr(),
+                            style:
+                                const TextStyle(fontWeight: FontWeight.bold)),
                         FixedGaps.verticalGap10,
                         InkWell(
                             onTap: () {},
@@ -75,8 +77,9 @@ class CustomDrawer extends StatelessWidget {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                        const Text("SETTINGS",
-                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        Text("SETTINGS".tr(),
+                            style:
+                                const TextStyle(fontWeight: FontWeight.bold)),
                         FixedGaps.verticalGap10,
                         _options(
                             onTap: () {},
@@ -84,14 +87,80 @@ class CustomDrawer extends StatelessWidget {
                             text: "Notifications"),
                         const Divider(color: Colors.black12),
                         _options(
-                            onTap: () {},
+                            onTap: () {
+                              showModalBottomSheet(
+                                  context: context,
+                                  shape: const BeveledRectangleBorder(),
+                                  builder: (context) {
+                                    return Padding(
+                                        padding: const EdgeInsets.all(12.0),
+                                        child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: [
+                                              InkWell(
+                                                  onTap: () {
+                                                    context.setLocale(
+                                                        const Locale(
+                                                            'ne', 'NE'));
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            const Text(
+                                                                "Nepali"),
+                                                            if (context
+                                                                    .locale ==
+                                                                const Locale(
+                                                                    'ne', 'NE'))
+                                                              const Icon(
+                                                                  Icons.check,
+                                                                  size: 20)
+                                                          ]))),
+                                              InkWell(
+                                                  onTap: () {
+                                                    context.setLocale(
+                                                        const Locale(
+                                                            'en', 'US'));
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            const Text(
+                                                                "English"),
+                                                            if (context
+                                                                    .locale ==
+                                                                const Locale(
+                                                                    'en', 'US'))
+                                                              const Icon(
+                                                                  Icons.check,
+                                                                  size: 20)
+                                                          ])))
+                                            ]));
+                                  });
+                            },
                             icon: Icons.language_rounded,
                             text: "Language"),
                         const Divider(color: Colors.black12),
                         _options(
                             onTap: () {},
                             icon: Icons.security_rounded,
-                            text: "Permissions"),
+                            text: "Permissions")
                       ]))),
               // HELP & LEGAL
               FixedGaps.verticalGap20,
@@ -101,14 +170,15 @@ class CustomDrawer extends StatelessWidget {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                        const Text("HELP & LEGAL",
-                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        Text("helpNLegal".tr(),
+                            style:
+                                const TextStyle(fontWeight: FontWeight.bold)),
                         FixedGaps.verticalGap10,
                         _options(
                             onTap: () => Navigator.pushNamed(
                                 context, Routes.helpAndSupport),
                             icon: Icons.contact_emergency,
-                            text: "Helo & Support"),
+                            text: "helpNSupp"),
                         const Divider(color: Colors.black12),
                         _options(
                             onTap: () {},
@@ -134,24 +204,23 @@ class CustomDrawer extends StatelessWidget {
                                       return const LoginScreen();
                                     }));
                                   },
-                                  question:
-                                      "Are you sure you want to log out?");
+                                  question: "logoutquestion");
                             },
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 10),
-                              child: Row(children: [
-                                Transform.rotate(
-                                    angle: 3.14,
-                                    child: const Icon(Icons.logout,
-                                        color: primaryColor)),
-                                FixedGaps.horizontalGap10,
-                                const Expanded(
-                                    child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [Text("Log Out")]))
-                              ]),
-                            ))
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10),
+                                child: Row(children: [
+                                  Transform.rotate(
+                                      angle: 3.14,
+                                      child: const Icon(Icons.logout,
+                                          color: primaryColor)),
+                                  FixedGaps.horizontalGap10,
+                                  Expanded(
+                                      child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [Text("logout".tr())]))
+                                ])))
                       ]))),
               // Padding(
               //     padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -194,7 +263,7 @@ class CustomDrawer extends StatelessWidget {
               Expanded(
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [Text(text)]))
+                      children: [Text(text.tr())]))
             ])));
   }
 }
