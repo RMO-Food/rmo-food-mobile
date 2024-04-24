@@ -12,5 +12,11 @@ class SharedPref {
 
   static setToken(String value) => _sharedPref.setString(RMOConst.token, value);
 
+  static setThemeOption(String value) =>
+      _sharedPref.setString(RMOConst.themeOption, value);
+
+  static String get getThemeOption =>
+      _sharedPref.getString(RMOConst.themeOption) ?? '';
+
   static String? get getToken => _sharedPref.getString(RMOConst.token);
 }

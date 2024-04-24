@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rmo_food/bloc/authentication/authentication_cubit.dart';
 import 'package:rmo_food/core/theme/common_theme.dart';
 import 'package:rmo_food/helper/gap.dart';
 import 'package:rmo_food/src/pages/services/checkout/checkout.dart';
@@ -27,21 +29,40 @@ class _CustomEndDrawerState extends State<CustomEndDrawer> {
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
               decoration: const BoxDecoration(color: primaryColor),
               child: Row(children: [
-                const CircleAvatar(
-                    child: Icon(Icons.person, color: Colors.black87)),
-                FixedGaps.horizontalGap5,
-                Expanded(
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                      Text("login".tr(),
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold)),
-                      Text("toAccessFeature".tr(),
-                          style: const TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold))
-                    ]))
+                if (BlocProvider.of<AuthenticationCubit>(context)
+                    is AuthenticationUnAuthenticated) ...{
+                  const CircleAvatar(
+                      child: Icon(Icons.person, color: Colors.black87)),
+                  FixedGaps.horizontalGap5,
+                  Expanded(
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                        Text("login".tr(),
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold)),
+                        Text("toAccessFeature".tr(),
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold))
+                      ]))
+                } else ...{
+                  const Expanded(
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                        Text("Hi, John",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold)),
+                        Text("Navbar",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold))
+                      ]))
+                }
               ])),
           Stack(clipBehavior: Clip.none, children: [
             if (selectedIndex == 1)

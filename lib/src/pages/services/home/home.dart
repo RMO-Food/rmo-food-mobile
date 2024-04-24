@@ -6,6 +6,7 @@ import 'package:rmo_food/bloc/authentication/authentication_cubit.dart';
 import 'package:rmo_food/core/theme/common_theme.dart';
 import 'package:rmo_food/helper/custom_appbar.dart';
 import 'package:rmo_food/helper/gap.dart';
+import 'package:rmo_food/locator/get_it.dart';
 import 'package:rmo_food/src/components/extensions.dart';
 import 'package:rmo_food/src/components/widget_helper.dart';
 import 'package:rmo_food/src/pages/services/menu/bloc/orderflow/orderflow_cubit.dart';
@@ -22,24 +23,28 @@ class HomeScreen extends StatelessWidget {
 }
 
 class _HomeScreen extends StatefulWidget {
-  const _HomeScreen({super.key});
+  const _HomeScreen();
 
   @override
   State<_HomeScreen> createState() => __HomeScreenState();
 }
 
-class __HomeScreenState extends State<_HomeScreen> {
+class __HomeScreenState extends State<_HomeScreen>
+    with AutomaticKeepAliveClientMixin {
   late final OrderflowCubit orderflowCubit;
+  late final OrderflowCubit recentOrderflowCubit;
 
   @override
   void initState() {
     orderflowCubit = BlocProvider.of<OrderflowCubit>(context)
       ..fetchCustomerOrder();
+    recentOrderflowCubit = getIt<OrderflowCubit>()..fetchCustomerOrder();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
         appBar: const CustomAppBar(subtitle: Text("Dashboard")),
         body: ListView(
@@ -95,29 +100,21 @@ class __HomeScreenState extends State<_HomeScreen> {
                     _title(
                         title: "recentOrders",
                         txtBtnName: "See All",
-                        onTap: () {}),
+                        onTap: () {
+                          Navigator.push(context,
+                              CupertinoPageRoute(builder: (context) {
+                            return BlocProvider.value(
+                                value: recentOrderflowCubit,
+                                child: RecentOrders(
+                                    recentOrderflowCubit:
+                                        recentOrderflowCubit));
+                          }));
+                        }),
                     FixedGaps.verticalGap10,
                     Expanded(
-                        child: ListView.builder(
-                            physics: const BouncingScrollPhysics(),
-                            itemCount: 10,
-                            itemBuilder: (context, index) {
-                              return Material(
-                                  child: ListTile(
-                                      splashColor: Colors.grey.shade200,
-                                      onTap: () {},
-                                      contentPadding: EdgeInsets.zero,
-                                      leading: const Icon(
-                                          Icons.location_on_outlined,
-                                          color: primaryColor),
-                                      title: Text(index % 2 == 0
-                                          ? "Shandar Momo"
-                                          : "Trisara Restaurant"),
-                                      subtitle: const Text(
-                                          "Order Completed --- on Delivery"),
-                                      trailing: const Icon(Icons.check_circle,
-                                          color: Colors.green, size: 30)));
-                            }))
+                        child: RecentOrders(
+                            recentOrderflowCubit: recentOrderflowCubit,
+                            showAppBar: false))
                   ])),
               FixedGaps.verticalGap20
             ]));
@@ -145,7 +142,6 @@ class __HomeScreenState extends State<_HomeScreen> {
     ]);
   }
 
-  // @override
-  // // TODO: implement wantKeepAlive
-  // bool get wantKeepAlive => true;
+  @override
+  bool get wantKeepAlive => true;
 }

@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:rmo_food/config/routes_imports.dart';
+import 'package:rmo_food/config/theme/theme_manager/theme_manager_cubit.dart';
 import 'package:rmo_food/core/theme/common_theme.dart';
 import 'package:rmo_food/helper/gap.dart';
 import 'package:rmo_food/src/components/full_button.dart';
@@ -29,10 +31,10 @@ class AppWidgetHelper {
             borderRadius: BorderRadius.circular(borderRadius ?? 2),
             boxShadow: [
               BoxShadow(
-                  color:
-                      MediaQuery.platformBrightnessOf(context).name == "light"
-                          ? Colors.grey.shade300
-                          : Colors.black54,
+                  color: BlocProvider.of<ThemeManagerCubit>(context).state ==
+                          ThemeMode.light
+                      ? Colors.grey.shade300
+                      : Colors.black54,
                   blurRadius: 5)
             ]),
         width: width,

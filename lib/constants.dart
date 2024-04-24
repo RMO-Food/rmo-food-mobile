@@ -4,4 +4,7 @@ class RMOConst {
 
   // SharedPref keys
   static const String token = "token";
+
+  // Theme Option
+  static const String themeOption = "themeOption";
 }
