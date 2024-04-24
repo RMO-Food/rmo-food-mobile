@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
@@ -32,9 +31,7 @@ void main() async {
         fallbackLocale: const Locale('en', 'US'),
         path: 'assets/language',
         child: const AppWrapper()));
-  }, (error, stack) {
-    log(error.toString());
-  });
+  }, (error, stack) {});
 }
 
 class AppWrapper extends StatefulWidget {

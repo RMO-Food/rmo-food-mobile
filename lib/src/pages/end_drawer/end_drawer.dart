@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rmo_food/core/theme/common_theme.dart';
@@ -25,19 +26,20 @@ class _CustomEndDrawerState extends State<CustomEndDrawer> {
           Container(
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 5),
               decoration: const BoxDecoration(color: primaryColor),
-              child: const Row(children: [
-                CircleAvatar(child: Icon(Icons.person, color: Colors.black87)),
+              child: Row(children: [
+                const CircleAvatar(
+                    child: Icon(Icons.person, color: Colors.black87)),
                 FixedGaps.horizontalGap5,
                 Expanded(
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                      Text("Login",
-                          style: TextStyle(
+                      Text("login".tr(),
+                          style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold)),
-                      Text("To access all feature",
-                          style: TextStyle(
+                      Text("toAccessFeature".tr(),
+                          style: const TextStyle(
                               color: Colors.white, fontWeight: FontWeight.bold))
                     ]))
               ])),
@@ -90,28 +92,25 @@ class _CustomEndDrawerState extends State<CustomEndDrawer> {
                 },
                 leading:
                     const Icon(Icons.notifications_active_outlined, size: 20),
-                title: const Text("Notification"))
+                title: Text("Notifications".tr()))
           ]),
           FixedGaps.verticalGap100,
           FixedGaps.verticalGap50,
           const Divider(color: Colors.black12),
-          Column(
-            children: [
-              ListTile(
-                  onTap: () {},
-                  leading:
-                      const Icon(Icons.app_settings_alt_outlined, size: 20),
-                  title: const Text("Settings")),
-              ListTile(
-                  onTap: () {},
-                  leading: const Icon(Icons.feedback_outlined, size: 20),
-                  title: const Text("Report")),
-              ListTile(
-                  onTap: () {},
-                  leading: const Icon(Icons.help_outline_rounded, size: 20),
-                  title: const Text("Help"))
-            ],
-          )
+          Column(children: [
+            ListTile(
+                onTap: () {},
+                leading: const Icon(Icons.app_settings_alt_outlined, size: 20),
+                title: Text("Settings".tr())),
+            ListTile(
+                onTap: () {},
+                leading: const Icon(Icons.feedback_outlined, size: 20),
+                title: Text("Report".tr())),
+            ListTile(
+                onTap: () {},
+                leading: const Icon(Icons.help_outline_rounded, size: 20),
+                title: Text("Help".tr()))
+          ])
         ])));
   }
 }

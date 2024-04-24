@@ -5,7 +5,6 @@ import 'package:rmo_food/helper/back_button.dart';
 import 'package:rmo_food/helper/error_message.dart';
 import 'package:rmo_food/helper/loading_bar.dart';
 import 'package:rmo_food/src/pages/services/menu/bloc/orderflow/orderflow_cubit.dart';
-import 'package:rmo_food/src/pages/services/menu/data/model/order.dart';
 
 class CustomerOrders extends StatefulWidget {
   final bool? showAppBar;
@@ -48,55 +47,59 @@ class _CustomerOrdersState extends State<CustomerOrders> {
               }
               if (state is CustomerOrderFetched) {
                 final orders = state.orderModel.orders ?? [];
-                final kitchenOrder = <OrderItem>[];
-                final approvedOrder = <OrderItem>[];
-                final pendingOrder = <OrderItem>[];
 
-                for (OrderDatum orderDatum in orders) {
-                  switch (orderDatum.status) {
-                    case "order_approved":
-                      approvedOrder.addAll(orderDatum.items ?? []);
-                      break;
-                    case "order_pending":
-                      pendingOrder.addAll(orderDatum.items ?? []);
-                      break;
-                    case "kitchen_preparing":
-                      kitchenOrder.addAll(orderDatum.items ?? []);
-                      break;
-                    default:
-                  }
-                }
-                final List<OrderItem> listedOrders = [
-                  ...approvedOrder,
-                  ...pendingOrder,
-                  ...kitchenOrder
-                ];
                 return orders.isEmpty
                     ? const Center(child: Text("No items to show."))
-                    : ListView.builder(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        physics: const BouncingScrollPhysics(),
+                    : ListView.separated(
+                        separatorBuilder: (context, index) => const Divider(),
                         itemCount: orders.length,
                         itemBuilder: (context, index) {
-                          final OrderItem orderDatum = listedOrders[index];
-                          return Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Material(
-                                    child: ListTile(
-                                        splashColor: Colors.grey.shade200,
-                                        onTap: () {},
-                                        contentPadding: EdgeInsets.zero,
-                                        leading: const Icon(
-                                            Icons.location_on_outlined,
-                                            color: primaryColor),
-                                        title: Text("${orderDatum.id}"),
-                                        subtitle: const Text(
-                                            "Order Completed --- on Delivery")))
-                              ]);
+                          return ExpansionTile(
+                              initiallyExpanded: true,
+                              backgroundColor: Colors.transparent,
+                              title: Text("Order Id - ${orders[index].id}"),
+                              shape: const BeveledRectangleBorder(),
+                              children: orders[index].items?.map((items) {
+                                    return Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Material(
+                                              child: ListTile(
+                                                  splashColor:
+                                                      Colors.grey.shade200,
+                                                  onTap: () {},
+                                                  contentPadding:
+                                                      EdgeInsets.zero,
+                                                  leading: const Icon(
+                                                      Icons
+                                                          .location_on_outlined,
+                                                      color: primaryColor),
+                                                  title: Text(
+                                                      "Item Id - ${items.id}"),
+                                                  subtitle: Text(
+                                                      _getOrderStatus(
+                                                          orders[index]
+                                                                  .status ??
+                                                              ""))))
+                                        ]);
+                                  }).toList() ??
+                                  []);
                         });
               }
               return const SizedBox.shrink();
             })));
+  }
+
+  String _getOrderStatus(String status) {
+    switch (status) {
+      case "kitchen_preparing":
+        return "Order Received -- In Kitchen";
+      case "order_approved":
+        return "Order Approved -- Order Received";
+      case "order_pending":
+        return "Order Pending";
+      default:
+        return "Order Pending";
+    }
   }
 }

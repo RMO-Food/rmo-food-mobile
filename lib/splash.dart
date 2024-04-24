@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:rmo_food/bloc/authentication/authentication_cubit.dart';
+import 'package:rmo_food/src/pages/authentication/login.dart';
 import 'package:rmo_food/src/pages/bottom_nav/bottom_nav.dart';
 import 'package:rmo_food/src/pages/services/profile/bloc/profile_bloc.dart';
 
@@ -18,22 +19,22 @@ class _SplashScreenState extends State<SplashScreen> {
       required int seconds,
       bool? isAuthenticated = false}) async {
     await Future.delayed(Duration(seconds: seconds));
-    if (mounted) {
-      Navigator.of(context).pushReplacement(PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) =>
-              const HomeNavigationScreen(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-              FadeTransition(opacity: animation, child: child)));
-    }
     // if (mounted) {
     //   Navigator.of(context).pushReplacement(PageRouteBuilder(
     //       pageBuilder: (context, animation, secondaryAnimation) =>
-    //           isAuthenticated!
-    //               ? const HomeNavigationScreen()
-    //               : const LoginScreen(),
+    //           const HomeNavigationScreen(),
     //       transitionsBuilder: (context, animation, secondaryAnimation, child) =>
     //           FadeTransition(opacity: animation, child: child)));
     // }
+    if (mounted) {
+      Navigator.of(context).pushReplacement(PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              isAuthenticated!
+                  ? const HomeNavigationScreen()
+                  : const LoginScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+              FadeTransition(opacity: animation, child: child)));
+    }
   }
 
   @override

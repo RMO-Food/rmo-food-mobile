@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rmo_food/core/theme/common_theme.dart';
@@ -36,9 +37,9 @@ class _MenuScreenState extends State<MenuScreen>
     super.build(context);
     return Scaffold(
       appBar: widget.showAppBar!
-          ? const CustomAppBar(
-              title: Text("Menu",
-                  style: TextStyle(fontSize: 18, color: primaryColor),
+          ? CustomAppBar(
+              title: Text("Menu".tr(),
+                  style: const TextStyle(fontSize: 18, color: primaryColor),
                   textAlign: TextAlign.center))
           : null,
       body: BlocBuilder<MenuItemCubit, MenuItemState>(

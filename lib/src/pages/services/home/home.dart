@@ -84,10 +84,7 @@ class __HomeScreenState extends State<_HomeScreen> {
                               }));
                             })),
                     FixedGaps.verticalGap10,
-                    Expanded(
-                        child: BlocProvider.value(
-                            value: orderflowCubit,
-                            child: const CustomerOrders(showAppBar: false)))
+                    const Expanded(child: CustomerOrders(showAppBar: false))
                   ])),
               FixedGaps.verticalGap20,
               AppWidgetHelper.decoratedContainer(context,

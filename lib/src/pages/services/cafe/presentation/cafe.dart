@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rmo_food/config/routes_imports.dart';
@@ -28,9 +29,9 @@ class _CafeScreenState extends State<CafeScreen>
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-        appBar: const CustomAppBar(
-            title: Text("Restaurants",
-                style: TextStyle(fontSize: 18, color: primaryColor),
+        appBar: CustomAppBar(
+            title: Text("Restaurants".tr(),
+                style: const TextStyle(fontSize: 18, color: primaryColor),
                 textAlign: TextAlign.center)),
         body: BlocBuilder<CafeCubit, CafeState>(builder: (context, state) {
           if (state is CafeListFetching) {
